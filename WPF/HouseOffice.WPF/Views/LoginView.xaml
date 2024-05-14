@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="HouseOffice.WPF.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:HouseOffice.WPF.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
+    d:DesignHeight="680"
+    d:DesignWidth="1020"
+    mc:Ignorable="d">
+
+    <Border Background="#FFFFFF">
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
+
+            <TextBlock
+                Margin="0,0,0,16"
+                FontSize="18"
+                Foreground="#18191B"
+                Text="Вход" />
+
+            <TextBlock
+                Margin="0,0,0,12"
+                FontSize="13"
+                Foreground="#848D95"
+                Text="Введите имя пользователя и пароль" />
+
+            <TextBox Margin="0,0,0,12" Style="{StaticResource RoundTextBox}" />
+            <TextBox Margin="0,0,0,12" Style="{StaticResource RoundTextBox}" />
+
+            <Button
+                Margin="0,0,0,16"
+                Background="#18191B"
+                Content="Войти"
+                Foreground="#FFFFFF"
+                Style="{StaticResource RoundButton}" />
+
+            <Button Command="{Binding NavigateToRegisterCommand}" Style="{StaticResource NoBackgroundButton}" />
+        </StackPanel>
+
+    </Border>
+</UserControl>

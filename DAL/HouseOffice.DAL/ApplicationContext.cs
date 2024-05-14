@@ -1,0 +1,31 @@
+﻿using HouseOffice.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+namespace HouseOffice.DAL
+{
+    public class ApplicationContext : DbContext
+    {
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Request> Requests { get; set; }
+
+        public ApplicationContext()
+        {
+            Task.Run(async () =>
+            {
+                await Database.EnsureCreatedAsync();
+            });
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var config = new ConfigurationBuilder()
+                            .AddJsonFile("appsettings.json")
+                            .SetBasePath(Directory.GetCurrentDirectory())
+                            .Build();
+
+            optionsBuilder.UseSqlServer(config.GetConnectionString("SQLServerConnection"));
+        }
+    }
+}
