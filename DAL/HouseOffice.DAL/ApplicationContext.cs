@@ -6,9 +6,9 @@ namespace HouseOffice.DAL
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Request> Requests { get; set; }
+        public DbSet<User> Users { get; init; }
+        public DbSet<Role> Roles { get; init; }
+        public DbSet<Request> Requests { get; init; }
 
         public ApplicationContext()
         {
