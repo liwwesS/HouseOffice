@@ -1,4 +1,5 @@
 ﻿using HouseOffice.DAL;
+using HouseOffice.WPF.Helpers;
 using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using HouseOffice.WPF.ViewModels;
@@ -29,6 +30,7 @@ public partial class App : Application
         services.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
         services.AddSingleton<INavigationService, NavigationService>();
 
+        services.AddSingleton<UserSession>();
         services.AddSingleton<IUserRepository, UserRepository>();
         services.AddSingleton<IRequestRepository, RequestRepository>();
 

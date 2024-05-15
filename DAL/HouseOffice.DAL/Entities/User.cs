@@ -24,9 +24,9 @@ namespace HouseOffice.DAL.Entities
 
         public string Password { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
 
         public string PassportSeries { get; set; }
 
@@ -36,6 +36,6 @@ namespace HouseOffice.DAL.Entities
 
         public DateTime PassportDate { get; set; }
 
-        public List<Request> Requests { get; set; } = new();
+        public List<UserRequest> UserRequests { get; set; } = new();
     }
 }

@@ -54,7 +54,8 @@
                             materialDesign:HintAssist.Foreground="#18191B"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Электронная почта"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding Email}" />
 
                         <TextBox
                             Margin="0,0,0,12"
@@ -63,7 +64,8 @@
                             materialDesign:HintAssist.Foreground="#18191B"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Фамилия"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding LastName}" />
 
                         <TextBox
                             Margin="0,0,0,12"
@@ -72,7 +74,8 @@
                             materialDesign:HintAssist.Foreground="#18191B"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Имя"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding FirstName}" />
 
                         <TextBox
                             Margin="0,0,0,12"
@@ -81,7 +84,8 @@
                             materialDesign:HintAssist.Foreground="#18191B"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Отчество"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding MiddleName}" />
 
                         <TextBox
                             Margin="0,0,0,12"
@@ -90,9 +94,11 @@
                             materialDesign:HintAssist.Foreground="#18191B"
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="СНИЛС"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding SNILS}" />
 
                         <PasswordBox
+                            x:Name="userPassword"
                             Margin="0,0,0,12"
                             materialDesign:HintAssist.Background="{x:Null}"
                             materialDesign:HintAssist.FloatingOffset="-2 -15"
@@ -127,7 +133,8 @@
                                 materialDesign:HintAssist.Foreground="#18191B"
                                 materialDesign:HintAssist.HelperText=""
                                 materialDesign:HintAssist.Hint="Серия"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Text="{Binding PassportSeries}" />
 
                             <TextBox
                                 Width="240"
@@ -137,7 +144,8 @@
                                 materialDesign:HintAssist.Foreground="#18191B"
                                 materialDesign:HintAssist.HelperText=""
                                 materialDesign:HintAssist.Hint="Номер"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                Text="{Binding PassportNumber}" />
                         </StackPanel>
 
                         <TextBox
@@ -149,6 +157,7 @@
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Кем выдан"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                            Text="{Binding PassportIssued}"
                             TextWrapping="Wrap" />
 
                         <DatePicker
@@ -161,21 +170,33 @@
                             materialDesign:HintAssist.HelperText=""
                             materialDesign:HintAssist.Hint="Дата выдачи"
                             materialDesign:TextFieldAssist.HasClearButton="True"
+                            Focusable="False"
+                            SelectedDate="{Binding PassportDate}"
                             SelectedDateFormat="Short"
                             Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                     </StackPanel>
                 </Grid>
             </Grid>
 
-            <Button
-                Width="500"
-                Margin="0,0,0,40"
-                VerticalAlignment="Bottom"
-                Background="#18191B"
-                Command="{Binding NavigateToLoginCommand}"
-                Content="Зарегистрироваться"
-                Foreground="#FFFFFF"
-                Style="{StaticResource RoundButton}" />
+            <StackPanel VerticalAlignment="Bottom">
+                <Button
+                    Width="400"
+                    Margin="0,0,0,10"
+                    Background="#18191B"
+                    Command="{Binding RegisterCommand}"
+                    CommandParameter="{Binding ElementName=userPassword}"
+                    Content="Зарегистрироваться"
+                    Foreground="#FFFFFF"
+                    Style="{StaticResource RoundButton}" />
+                <Button
+                    Width="400"
+                    Margin="0,0,0,30"
+                    Background="#18191B"
+                    Command="{Binding NavigateToLoginCommand}"
+                    Content="Вернуться назад"
+                    Foreground="#FFFFFF"
+                    Style="{StaticResource RoundButton}" />
+            </StackPanel>
         </Grid>
     </Border>
 </UserControl>

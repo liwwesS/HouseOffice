@@ -2,8 +2,8 @@
 
 namespace HouseOffice.WPF.Repositories
 {
-    public interface IRequestRepository : IRepository<Request>
+    public interface IRequestRepository : IRepository<UserRequest>
     {
-        Task<List<Request>> GetRequestsByUserIdAsync(int userId);
+        Task<List<UserRequest>> GetRequestsByUserIdAsync(int userId);
     }
 }

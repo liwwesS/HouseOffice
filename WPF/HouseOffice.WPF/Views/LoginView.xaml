@@ -49,9 +49,11 @@
                 materialDesign:HintAssist.Foreground="#18191B"
                 materialDesign:HintAssist.HelperText=""
                 materialDesign:HintAssist.Hint="Логин"
-                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                Text="{Binding Login}" />
 
             <PasswordBox
+                x:Name="userPassword"
                 Margin="0,0,0,12"
                 materialDesign:HintAssist.Background="{x:Null}"
                 materialDesign:HintAssist.FloatingOffset="-2 -15"
@@ -63,6 +65,8 @@
             <Button
                 Margin="0,0,0,16"
                 Background="#18191B"
+                Command="{Binding}"
+                CommandParameter="{Binding ElementName=userPassword}"
                 Content="Войти"
                 Foreground="#FFFFFF"
                 Style="{StaticResource RoundButton}" />

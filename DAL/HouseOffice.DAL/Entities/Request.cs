@@ -9,15 +9,8 @@ namespace HouseOffice.DAL.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int UserId { get; set; }
-        public User? Users { get; set; }
+        public string RequestType { get; set; }
 
-        public string FamilyMember { get; set; }
-
-        public string HousingConditions { get; set; }
-
-        public string ImprovingConditions { get; set; }
-
-        public bool LowIncomeFamily { get; set; }
+        public List<UserRequest> UserRequests { get; set; } = new();
     }
 }
