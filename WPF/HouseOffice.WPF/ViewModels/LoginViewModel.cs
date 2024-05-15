@@ -3,6 +3,7 @@ using HouseOffice.WPF.Helpers;
 using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace HouseOffice.WPF.ViewModels
 {
@@ -26,10 +27,14 @@ namespace HouseOffice.WPF.ViewModels
             UserRepository = userRepository;
 
             NavigateToRegisterCommand = new RelayCommand(o => { NavigationService.NavigateTo<RegisterViewModel>(); }, o => true);
+            LoginCommand = new RelayCommand(async (o) => await CheckUserAsync(o));
         }
 
-        private async Task CheckUserAsync()
+        private async Task CheckUserAsync(object parameter)
         {
+            var passwordBox = parameter as PasswordBox;
+            Password = passwordBox.Password;
+
             var user = await UserRepository.GetUserByEmailAsync(Login);
 
             if (user == null)
@@ -38,7 +43,14 @@ namespace HouseOffice.WPF.ViewModels
                 return;
             }
 
+            if (user.Password != Password)
+            {
+                MessageBox.Show("Неверный пароль.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             UserSession.CurrentUser = user;
+            NavigationService.NavigateTo<AccountViewModel>();
         }
     }
 }

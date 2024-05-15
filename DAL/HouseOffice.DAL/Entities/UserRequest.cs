@@ -15,6 +15,8 @@ namespace HouseOffice.DAL.Entities
         public int RequestId { get; set; }
         public Request? Requests { get; set; }
 
+        public string Status { get; set; }
+
         public string? FamilyMember { get; set; }
 
         public string? HousingConditions { get; set; }

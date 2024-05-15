@@ -16,6 +16,7 @@ namespace HouseOffice.WPF.Repositories
         public async Task<List<UserRequest>> GetRequestsByUserIdAsync(int userId)
         {
             return await _context.UserRequests
+                .Include(r => r.Requests)
                 .Where(r => r.UserId == userId)
                 .ToListAsync();
         }

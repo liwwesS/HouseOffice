@@ -65,7 +65,7 @@
             <Button
                 Margin="0,0,0,16"
                 Background="#18191B"
-                Command="{Binding}"
+                Command="{Binding LoginCommand}"
                 CommandParameter="{Binding ElementName=userPassword}"
                 Content="Войти"
                 Foreground="#FFFFFF"

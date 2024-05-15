@@ -15,7 +15,7 @@ namespace HouseOffice.WPF.ViewModels
         public MainViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
-            Navigation.NavigateTo<AddUserRequestViewModel>();
+            Navigation.NavigateTo<LoginViewModel>();
 
             DragMoveCommand = new DragMoveCommand();
             CloseCommand = new CloseCommand();
