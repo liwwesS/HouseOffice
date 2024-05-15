@@ -33,18 +33,14 @@ public partial class App : Application
 
     protected override async void OnStartup(StartupEventArgs e)
     {
-
         await using var context = new ApplicationContext();
         await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
-
 
         Application.Current.Dispatcher.Invoke(() =>
         {
             MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
             base.OnStartup(e);
-        });
-
-        
+        });      
     }
 }

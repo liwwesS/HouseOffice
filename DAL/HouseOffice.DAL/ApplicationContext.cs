@@ -10,8 +10,13 @@ namespace HouseOffice.DAL
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<Request> Requests => Set<Request>();
 
-        public ApplicationContext()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Role>().HasData(
+                new Role { Id = 1, RoleType = "Admin" },
+                new Role { Id = 2, RoleType = "Boss" },
+                new Role { Id = 3, RoleType = "Worker" },
+                new Role { Id = 4, RoleType = "User" });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -9,7 +9,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Assets\Fonts\" />
+      <None Remove="Assets\Fonts\Inter-Black.ttf" />
+      <None Remove="Assets\Fonts\Inter-Bold.ttf" />
+      <None Remove="Assets\Fonts\Inter-ExtraBold.ttf" />
+      <None Remove="Assets\Fonts\Inter-ExtraLight.ttf" />
+      <None Remove="Assets\Fonts\Inter-Light.ttf" />
+      <None Remove="Assets\Fonts\Inter-Medium.ttf" />
+      <None Remove="Assets\Fonts\Inter-Regular.ttf" />
+      <None Remove="Assets\Fonts\Inter-SemiBold.ttf" />
+      <None Remove="Assets\Fonts\Inter-Thin.ttf" />
     </ItemGroup>
 
     <ItemGroup>
@@ -22,6 +30,18 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\DAL\HouseOffice.DAL\HouseOffice.DAL.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Assets\Fonts\Inter-Black.ttf" />
+      <Resource Include="Assets\Fonts\Inter-Bold.ttf" />
+      <Resource Include="Assets\Fonts\Inter-ExtraBold.ttf" />
+      <Resource Include="Assets\Fonts\Inter-ExtraLight.ttf" />
+      <Resource Include="Assets\Fonts\Inter-Light.ttf" />
+      <Resource Include="Assets\Fonts\Inter-Medium.ttf" />
+      <Resource Include="Assets\Fonts\Inter-Regular.ttf" />
+      <Resource Include="Assets\Fonts\Inter-SemiBold.ttf" />
+      <Resource Include="Assets\Fonts\Inter-Thin.ttf" />
     </ItemGroup>
 
 </Project>

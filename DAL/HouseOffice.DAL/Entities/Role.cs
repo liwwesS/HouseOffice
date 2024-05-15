@@ -9,9 +9,8 @@ namespace HouseOffice.DAL.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
         public string RoleType { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public List<User> Users { get; set; } = new();
     }
 }
