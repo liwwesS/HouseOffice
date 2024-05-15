@@ -27,7 +27,7 @@ public partial class App : Application
         services.AddSingleton<MainViewModel>();
         services.AddTransient<LoginViewModel>();
         services.AddTransient<RegisterViewModel>();
-        services.AddTransient<AddRequestViewModel>();
+        services.AddTransient<AddUserRequestViewModel>();
 
         services.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
         services.AddSingleton<INavigationService, NavigationService>();

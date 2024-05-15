@@ -2,11 +2,11 @@
 
 namespace HouseOffice.WPF.ViewModels;
 
-public class AddRequestViewModel : ViewModelBase
+public class AddUserRequestViewModel : ViewModelBase
 {
     public INavigationService NavigationService { get; set; }
 
-    public AddRequestViewModel(INavigationService navigationService)
+    public AddUserRequestViewModel(INavigationService navigationService)
     {
        NavigationService = navigationService;
     }

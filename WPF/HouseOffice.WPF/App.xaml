@@ -1,10 +1,10 @@
 ﻿<Application
     x:Class="HouseOffice.WPF.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:view="clr-namespace:HouseOffice.WPF.Views"
     xmlns:viewmodel="clr-namespace:HouseOffice.WPF.ViewModels"
-    xmlns:window="clr-namespace:HouseOffice.WPF"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:window="clr-namespace:HouseOffice.WPF">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -28,8 +28,8 @@
                 <view:RegisterView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodel:AddRequestViewModel}">
-                <view:AddRequestView />
+            <DataTemplate DataType="{x:Type viewmodel:AddUserRequestViewModel}">
+                <view:AddUserRequestView />
             </DataTemplate>
 
         </ResourceDictionary>

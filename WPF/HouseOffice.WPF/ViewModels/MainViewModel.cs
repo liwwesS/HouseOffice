@@ -1,7 +1,6 @@
 ﻿using HouseOffice.WPF.Commands;
 using HouseOffice.WPF.Services;
 using System.Windows.Input;
-using HouseOffice.WPF.Views;
 
 namespace HouseOffice.WPF.ViewModels
 {
@@ -16,7 +15,7 @@ namespace HouseOffice.WPF.ViewModels
         public MainViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
-            Navigation.NavigateTo<AddRequestViewModel>();
+            Navigation.NavigateTo<AddUserRequestViewModel>();
 
             DragMoveCommand = new DragMoveCommand();
             CloseCommand = new CloseCommand();
