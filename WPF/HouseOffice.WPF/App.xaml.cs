@@ -1,4 +1,5 @@
 ﻿using HouseOffice.DAL;
+using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using HouseOffice.WPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,9 @@ public partial class App : Application
         services.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
         services.AddSingleton<INavigationService, NavigationService>();
 
+        services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddSingleton<IRequestRepository, RequestRepository>();
+
         _serviceProvider = services.BuildServiceProvider();
     }
 
@@ -36,7 +40,7 @@ public partial class App : Application
         await using var context = new ApplicationContext();
         await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
 
-        Application.Current.Dispatcher.Invoke(() =>
+        Current.Dispatcher.Invoke(() =>
         {
             MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             MainWindow.Show();
