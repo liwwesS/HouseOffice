@@ -45,6 +45,7 @@
             <TextBox
                 Margin="0,0,0,12"
                 materialDesign:HintAssist.Background="{x:Null}"
+                materialDesign:HintAssist.FloatingOffset="-2 -15"
                 materialDesign:HintAssist.Foreground="#18191B"
                 materialDesign:HintAssist.HelperText=""
                 materialDesign:HintAssist.Hint="Логин"
@@ -53,6 +54,7 @@
             <PasswordBox
                 Margin="0,0,0,12"
                 materialDesign:HintAssist.Background="{x:Null}"
+                materialDesign:HintAssist.FloatingOffset="-2 -15"
                 materialDesign:HintAssist.Foreground="#18191B"
                 materialDesign:HintAssist.HelperText=""
                 materialDesign:HintAssist.Hint="Пароль"

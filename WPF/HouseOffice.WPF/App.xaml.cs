@@ -31,17 +31,20 @@ public partial class App : Application
         _serviceProvider = services.BuildServiceProvider();
     }
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
-        Task.Run(async () =>
+
+        await using var context = new ApplicationContext();
+        await context.Database.EnsureCreatedAsync().ConfigureAwait(false);
+
+
+        Application.Current.Dispatcher.Invoke(() =>
         {
-            await using var context = new ApplicationContext();
-            await context.Database.EnsureCreatedAsync();
+            MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            MainWindow.Show();
+            base.OnStartup(e);
         });
 
-        MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-        MainWindow.Show();
-
-        base.OnStartup(e);
+        
     }
 }

@@ -6,16 +6,12 @@ namespace HouseOffice.DAL
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<User> Users { get; init; }
-        public DbSet<Role> Roles { get; init; }
-        public DbSet<Request> Requests { get; init; }
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Role> Roles => Set<Role>();
+        public DbSet<Request> Requests => Set<Request>();
 
         public ApplicationContext()
         {
-            Task.Run(async () =>
-            {
-                await Database.EnsureCreatedAsync();
-            });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
