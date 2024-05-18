@@ -53,7 +53,7 @@ namespace HouseOffice.WPF.ViewModels
             {
                 case 1:
                     UserSession.CurrentUser = user;
-                    NavigationService.NavigateTo<WorkerViewModel>();
+                    NavigationService.NavigateTo<AdminViewModel>();
                     break;
                 case 2:
                     UserSession.CurrentUser = user;

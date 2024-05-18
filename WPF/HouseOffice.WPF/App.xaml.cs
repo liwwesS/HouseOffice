@@ -28,6 +28,7 @@ public partial class App : Application
         services.AddTransient<RegisterViewModel>();
         services.AddTransient<AccountViewModel>();
         services.AddTransient<WorkerViewModel>();
+        services.AddTransient<AdminViewModel>();
         services.AddTransient<AddUserRequestViewModel>();
 
         services.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));

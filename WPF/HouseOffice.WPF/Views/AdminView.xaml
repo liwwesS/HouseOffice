@@ -417,7 +417,7 @@
         <Border Background="#FFFFFF" CornerRadius="20">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1.2*" />
                     <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
 
@@ -429,6 +429,13 @@
 
                     <Grid Grid.Column="0">
                         <StackPanel Margin="20,10">
+                            <TextBlock
+                                Margin="0,10,0,0"
+                                FontFamily="/Assets/Fonts/#Inter SemiBold"
+                                FontSize="20"
+                                Foreground="#848D95"
+                                Text="Администратор" />
+
                             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                                 <TextBlock Foreground="#18191B" Text="Имя пользователя: " />
                                 <TextBlock
@@ -438,7 +445,7 @@
                             </StackPanel>
 
                             <TextBlock
-                                Margin="0,20,0,0"
+                                Margin="0,10,0,0"
                                 FontFamily="/Assets/Fonts/#Inter SemiBold"
                                 FontSize="24"
                                 Text="Все обращения" />
