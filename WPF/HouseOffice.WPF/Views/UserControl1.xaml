@@ -121,7 +121,10 @@
                                 Text="Серия: "
                                 VerticalAlignment="Center"
                                 Width="65" />
-                            <TextBox Height="34" Style="{StaticResource RoundTextBox}" Width="60"/>
+                            <TextBox
+                                Height="34"
+                                Style="{StaticResource RoundTextBox}"
+                                Width="60" />
                         </StackPanel>
 
                         <StackPanel Margin="10,12,24,0" Orientation="Horizontal">
@@ -132,7 +135,10 @@
                                 Text="Номер: "
                                 VerticalAlignment="Center"
                                 Width="45" />
-                            <TextBox Height="34" Width="180" Style="{StaticResource RoundTextBox}" />
+                            <TextBox
+                                Height="34"
+                                Style="{StaticResource RoundTextBox}"
+                                Width="180" />
                         </StackPanel>
                     </StackPanel>
 
