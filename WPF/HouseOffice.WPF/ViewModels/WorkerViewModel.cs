@@ -5,7 +5,10 @@ using HouseOffice.WPF.Helpers;
 using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using Microsoft.EntityFrameworkCore;
+using PropertyChanged;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HouseOffice.WPF.ViewModels
@@ -23,6 +26,10 @@ namespace HouseOffice.WPF.ViewModels
         public ObservableCollection<string> StatusComboBox { get; set; }
 
         public ICommand UpdateStatusCommand { get; set; }
+        public ICommand DataGridSelectionChangedCommand { get; set; }
+        public ICommand ComboBoxSelectionChangedCommand { get; set; }
+
+        public UserRequest SelectedUserRequest { get; set; }
         public string SelectedStatus { get; set; }
 
         private readonly UserRequestUpdater _userRequestUpdater;
@@ -39,6 +46,8 @@ namespace HouseOffice.WPF.ViewModels
 
             _userRequestUpdater = new UserRequestUpdater(UserRequests);
 
+            DataGridSelectionChangedCommand = new RelayCommand(OnDataGridSelectionChanged);
+            ComboBoxSelectionChangedCommand = new RelayCommand(OnComboBoxSelectionChanged); 
             UpdateStatusCommand = new RelayCommand(OnUpdateStatusAsync);
 
             _ = LoadDataAsync();
@@ -57,7 +66,28 @@ namespace HouseOffice.WPF.ViewModels
             }
 
             StatusComboBox = new ObservableCollection<string>(statusComboBox);
+            UserRequests = new ObservableCollection<UserRequest>(userRequests);
+
             _userRequestUpdater.UpdateRequests(userRequests);
+        }
+
+        private void OnDataGridSelectionChanged(object parameter)
+        {
+            var args = parameter as SelectionChangedEventArgs;
+            if (args?.Source is not DataGrid dataGrid) return;
+
+            SelectedUserRequest = dataGrid.SelectedItem as UserRequest;
+        }
+
+        private void OnComboBoxSelectionChanged(object parameter)
+        {
+            var args = parameter as SelectionChangedEventArgs;
+            if (args?.Source is not ComboBox comboBox) return;
+
+            var selectedStatus = comboBox.SelectedItem as string;
+            if (selectedStatus == null) return;
+
+            SelectedStatus = selectedStatus;
         }
 
         private async void OnUpdateStatusAsync(object parameter)
@@ -65,17 +95,34 @@ namespace HouseOffice.WPF.ViewModels
             await UpdateUserRequestAsync();
         }
 
+        private static async Task<int> GetStatusIdAsync(string statusType)
+        {
+            await using var context = new ApplicationContext();
+            var status = await context.Status.FirstOrDefaultAsync(x => x.StatusType == statusType);
+            return status?.Id ?? -1; 
+        }
+
         private async Task UpdateUserRequestAsync()
         {
-            if (SelectedStatus == null) return;
+            if (SelectedUserRequest == null || SelectedStatus == null) return;
 
-            var selectedUserRequest = UserRequests.FirstOrDefault(ur => ur.UserId == UserSession.CurrentUser.Id);
-            if (selectedUserRequest == null) return;
+            var result = MessageBox.Show("Вы уверены, что хотите изменить статус?", "Подтверждение изменения статуса", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            selectedUserRequest.Status.StatusType = SelectedStatus;
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
 
-            await RequestRepository.UpdateAsync(selectedUserRequest);
+            var selectedStatusId = await GetStatusIdAsync(SelectedStatus);
 
+            if (selectedStatusId == -1)
+            {
+                return;
+            }
+
+            SelectedUserRequest.StatusId = selectedStatusId;
+
+            await RequestRepository.UpdateAsync(SelectedUserRequest);
             _userRequestUpdater.UpdateRequests(await RequestRepository.GetAllAsync());
         }
     }

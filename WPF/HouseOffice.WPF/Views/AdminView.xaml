@@ -101,7 +101,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="2*"
-                            Binding="{Binding Path=Requests.Id}"
+                            Binding="{Binding Id}"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="13"
                             Foreground="#848D95"
@@ -115,7 +115,7 @@
                             Header="Тип" />
                         <DataGridTextColumn
                             Width="2*"
-                            Binding="{Binding Path=Requests.RequestType}"
+                            Binding="{Binding Path=Users.FIO}"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="13"
                             Foreground="#848D95"

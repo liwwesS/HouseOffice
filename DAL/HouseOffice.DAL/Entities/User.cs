@@ -37,5 +37,8 @@ namespace HouseOffice.DAL.Entities
         public DateTime PassportDate { get; set; }
 
         public List<UserRequest> UserRequests { get; set; } = new();
+
+        [NotMapped]
+        public string FIO => $"{LastName} {FirstName} {MiddleName}";
     }
 }
