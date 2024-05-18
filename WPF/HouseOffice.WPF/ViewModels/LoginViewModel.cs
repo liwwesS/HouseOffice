@@ -49,8 +49,25 @@ namespace HouseOffice.WPF.ViewModels
                 return;
             }
 
-            UserSession.CurrentUser = user;
-            NavigationService.NavigateTo<AccountViewModel>();
+            switch (user.RoleId)
+            {
+                case 1:
+                    UserSession.CurrentUser = user;
+                    NavigationService.NavigateTo<WorkerViewModel>();
+                    break;
+                case 2:
+                    UserSession.CurrentUser = user;
+                    NavigationService.NavigateTo<WorkerViewModel>();
+                    break;
+                case 3:
+                    UserSession.CurrentUser = user;
+                    NavigationService.NavigateTo<WorkerViewModel>();
+                    break;
+                case 4:
+                    UserSession.CurrentUser = user;
+                    NavigationService.NavigateTo<AccountViewModel>();
+                    break;
+            }
         }
     }
 }

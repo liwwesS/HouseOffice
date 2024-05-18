@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="TextBlock" x:Key="NameCoinTextBlock">
+    <Style x:Key="NameCoinTextBlock" TargetType="TextBlock">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="#18191B" />
         <Setter Property="FontFamily" Value="/Assets/Fonts/#Inter Medium" />
@@ -8,7 +8,7 @@
         <Setter Property="Margin" Value="12,0,6,0" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="ShortNameCoinTextBlock">
+    <Style x:Key="ShortNameCoinTextBlock" TargetType="TextBlock">
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="#848D95" />
         <Setter Property="FontFamily" Value="/Assets/Fonts/#Inter Medium" />

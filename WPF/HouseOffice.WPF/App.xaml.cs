@@ -5,7 +5,6 @@ using HouseOffice.WPF.Services;
 using HouseOffice.WPF.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
-using HouseOffice.WPF.Views;
 
 namespace HouseOffice.WPF;
 
@@ -28,6 +27,7 @@ public partial class App : Application
         services.AddTransient<LoginViewModel>();
         services.AddTransient<RegisterViewModel>();
         services.AddTransient<AccountViewModel>();
+        services.AddTransient<WorkerViewModel>();
         services.AddTransient<AddUserRequestViewModel>();
 
         services.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));

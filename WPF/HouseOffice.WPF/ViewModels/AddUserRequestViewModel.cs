@@ -6,6 +6,9 @@ using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace HouseOffice.WPF.ViewModels;
 
@@ -18,11 +21,19 @@ public class AddUserRequestViewModel : ViewModelBase
 
     public INavigationService NavigationService { get; set; }
 
+    public ICommand RequestSelectionChangedCommand { get; set; }
     public RelayCommand AddRequestAndNavigate { get; set; }
 
     public ObservableCollection<string> Requests { get; set; }
 
     public string SelectedRequest { get; set; }
+
+    public Visibility LifeUpgradeVisibility { get; set; } = Visibility.Visible;
+    public Visibility CheckHouseVisibility { get; set; } = Visibility.Collapsed;
+    public Visibility WorkStageVisibility { get; set; } = Visibility.Collapsed;
+    public Visibility FamilyVisibility { get; set; } = Visibility.Collapsed;
+    public Visibility KadastrVisibility { get; set; } = Visibility.Collapsed;
+    public Visibility LeftColumn { get; set; } = Visibility.Collapsed;
 
     public AddUserRequestViewModel(INavigationService navigationService, UserSession userSession, IUserRepository userRepository, IRequestRepository requestRepository)
     {
@@ -33,6 +44,7 @@ public class AddUserRequestViewModel : ViewModelBase
 
         Requests = new ObservableCollection<string>();
         AddRequestAndNavigate = new RelayCommand(OnAddRequestAndNavigate);
+        RequestSelectionChangedCommand = new RelayCommand(OnRequestSelectionChanged);
 
         _ = GetDataAsync();
     }
@@ -41,8 +53,10 @@ public class AddUserRequestViewModel : ViewModelBase
     {
         await using var context = new ApplicationContext();
         var requests = await context.Requests.Select(x => x.RequestType.ToString()).Distinct().ToListAsync();
+        var selectedRequest = await context.Requests.FirstOrDefaultAsync(x => x.Id == 1);
 
         Requests = new ObservableCollection<string>(requests);
+        SelectedRequest = selectedRequest.RequestType;
     }
 
     private async Task AddUserRequestAsync()
@@ -54,7 +68,7 @@ public class AddUserRequestViewModel : ViewModelBase
         var request = new UserRequest()
         {
             UserId = UserSession.CurrentUser.Id,
-            Status = "Создано",
+            StatusId = 1,
             RequestId = requestId,
         };
 
@@ -65,5 +79,59 @@ public class AddUserRequestViewModel : ViewModelBase
     {
         await AddUserRequestAsync();
         NavigationService.NavigateTo<AccountViewModel>();
+    }
+
+    private void OnRequestSelectionChanged(object parameter)
+    {
+        var args = parameter as SelectionChangedEventArgs;
+        if (args?.Source is not ComboBox comboBox) return;
+
+        if (comboBox.SelectedItem is not string selectedTransaction) return;
+        if (Requests.Contains(selectedTransaction))
+        {
+            switch (selectedTransaction)
+            {
+                case "На улучшение жилищных условий":
+                    LeftColumn = Visibility.Collapsed;
+                    FamilyVisibility = Visibility.Collapsed;
+                    CheckHouseVisibility = Visibility.Collapsed;
+                    WorkStageVisibility = Visibility.Collapsed;
+                    KadastrVisibility = Visibility.Collapsed;
+                    LifeUpgradeVisibility = Visibility.Visible;
+                    break;
+                case "Выдача справки о составе семьи":
+                    LeftColumn = Visibility.Visible;
+                    CheckHouseVisibility = Visibility.Collapsed;
+                    WorkStageVisibility = Visibility.Collapsed;
+                    KadastrVisibility = Visibility.Collapsed;
+                    LifeUpgradeVisibility = Visibility.Collapsed;
+                    FamilyVisibility = Visibility.Visible;
+                    break;
+                case "На обследование дома":
+                    LeftColumn = Visibility.Visible;
+                    WorkStageVisibility = Visibility.Collapsed;
+                    KadastrVisibility = Visibility.Collapsed;
+                    LifeUpgradeVisibility = Visibility.Collapsed;
+                    FamilyVisibility = Visibility.Collapsed;
+                    CheckHouseVisibility = Visibility.Visible;
+                    break;
+                case "На снятие дома с кадастрого учёта":
+                    LeftColumn = Visibility.Visible;
+                    WorkStageVisibility = Visibility.Collapsed;
+                    LifeUpgradeVisibility = Visibility.Collapsed;
+                    FamilyVisibility = Visibility.Collapsed;
+                    CheckHouseVisibility = Visibility.Collapsed;
+                    KadastrVisibility = Visibility.Visible;
+                    break;
+                case "Выдача справки о трудовом стаже":
+                    LeftColumn = Visibility.Visible;
+                    LifeUpgradeVisibility = Visibility.Collapsed;
+                    FamilyVisibility = Visibility.Collapsed;
+                    CheckHouseVisibility = Visibility.Collapsed;
+                    KadastrVisibility = Visibility.Collapsed;
+                    WorkStageVisibility = Visibility.Visible;
+                    break;
+            }
+        }
     }
 }

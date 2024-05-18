@@ -9,6 +9,7 @@ namespace HouseOffice.DAL
         public DbSet<User> Users => Set<User>();
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<Request> Requests => Set<Request>();
+        public DbSet<Status> Status => Set<Status>();
         public DbSet<UserRequest> UserRequests => Set<UserRequest>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +26,11 @@ namespace HouseOffice.DAL
                 new Request { Id = 3, RequestType = "На обследование дома" },
                 new Request { Id = 4, RequestType = "На снятие дома с кадастрого учёта" },
                 new Request { Id = 5, RequestType = "Выдача справки о трудовом стаже" });
+
+            modelBuilder.Entity<Status>().HasData(
+                new Status { Id = 1, StatusType = "Создано" },
+                new Status { Id = 2, StatusType = "В работе" },
+                new Status { Id = 3, StatusType = "Завершено" });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

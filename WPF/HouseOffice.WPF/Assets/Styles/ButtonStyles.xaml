@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style TargetType="Button" x:Key="DefaultButton">
+    <Style x:Key="DefaultButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -19,9 +19,9 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Duration="0:0:0.1"
                                 Storyboard.TargetProperty="Opacity"
-                                To="0.8" />
+                                To="0.8"
+                                Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -29,9 +29,9 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Duration="0:0:0.1"
                                 Storyboard.TargetProperty="Opacity"
-                                To="1" />
+                                To="1"
+                                Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -39,7 +39,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="Button" x:Key="CloseButton">
+    <Style x:Key="CloseButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -49,7 +49,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Image Source="{StaticResource CloseIcon}" x:Name="CloseIcon" />
+                        <Image x:Name="CloseIcon" Source="{StaticResource CloseIcon}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -77,7 +77,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="MinimizeButton">
+    <Style x:Key="MinimizeButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -87,7 +87,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Image Source="{StaticResource MinimizeIcon}" x:Name="MinimizeIcon" />
+                        <Image x:Name="MinimizeIcon" Source="{StaticResource MinimizeIcon}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -115,7 +115,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="GenerateButton">
+    <Style x:Key="GenerateButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -126,10 +126,10 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Image
-                            Height="13"
-                            Source="{StaticResource GenerateIcon}"
+                            x:Name="GenerateIcon"
                             Width="13"
-                            x:Name="GenerateIcon" />
+                            Height="13"
+                            Source="{StaticResource GenerateIcon}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -157,7 +157,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="ComboWalletButton">
+    <Style x:Key="ComboWalletButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -167,10 +167,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border
+                        x:Name="BordBackground"
                         Background="#FFFFFF"
                         BorderThickness="0"
-                        CornerRadius="8"
-                        x:Name="BordBackground">
+                        CornerRadius="8">
 
                         <ContentPresenter />
                     </Border>
@@ -181,10 +181,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="BordBackground"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="#EFF2F5" />
+                                            To="#EFF2F5"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -192,10 +192,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="BordBackground"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="#FFFFFF" />
+                                            To="#FFFFFF"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -206,7 +206,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type RadioButton}" x:Key="DefaultRadioButton">
+    <Style x:Key="DefaultRadioButton" TargetType="{x:Type RadioButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Width" Value="20" />
@@ -220,7 +220,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ToggleButton" x:Key="DefaultToggleButton">
+    <Style x:Key="DefaultToggleButton" TargetType="ToggleButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -235,7 +235,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ToggleButton" x:Key="ArrowToggleButton">
+    <Style x:Key="ArrowToggleButton" TargetType="ToggleButton">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
@@ -246,10 +246,10 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid>
                         <Image
-                            Height="5"
-                            Source="{StaticResource DownArrow}"
+                            x:Name="ArrowIcon"
                             Width="9"
-                            x:Name="ArrowIcon" />
+                            Height="5"
+                            Source="{StaticResource DownArrow}" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -277,7 +277,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ToggleButton" x:Key="ListToggleButton">
+    <Style x:Key="ListToggleButton" TargetType="ToggleButton">
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Width" Value="480" />
@@ -286,24 +286,24 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border
+                        x:Name="BorderBackground"
                         Background="#FFFFFF"
                         BorderThickness="2"
-                        CornerRadius="12"
-                        x:Name="BorderBackground">
+                        CornerRadius="12">
 
                         <Border.BorderBrush>
-                            <SolidColorBrush Color="Black" Opacity="0.01" />
+                            <SolidColorBrush Opacity="0.01" Color="Black" />
                         </Border.BorderBrush>
 
                         <Grid Margin="16,11,16,11">
                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
 
                             <Image
+                                x:Name="CheckedIcon"
+                                Width="24"
                                 Height="24"
                                 HorizontalAlignment="Right"
-                                Source="{StaticResource UncheckedIcon}"
-                                Width="24"
-                                x:Name="CheckedIcon" />
+                                Source="{StaticResource UncheckedIcon}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -312,10 +312,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="BorderBackground"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="#EFF2F5" />
+                                            To="#EFF2F5"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -323,10 +323,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <ColorAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="BorderBackground"
                                             Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                            To="#FFFFFF" />
+                                            To="#FFFFFF"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -357,7 +357,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ToggleButton" x:Key="ListToggleButtonDisabled">
+    <Style x:Key="ListToggleButtonDisabled" TargetType="ToggleButton">
         <Setter Property="Opacity" Value="0.7" />
         <Setter Property="IsEnabled" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
@@ -367,9 +367,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border
+                        x:Name="BorderBackground"
                         Background="#FFFFFF"
-                        CornerRadius="12"
-                        x:Name="BorderBackground">
+                        CornerRadius="12">
 
                         <Grid Margin="16,12,16,12">
                             <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" />
@@ -380,7 +380,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="NoBackgroundButton">
+    <Style x:Key="NoBackgroundButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
@@ -397,9 +397,9 @@
                                 Text="Вы еще не зарегистрированы? " />
 
                             <TextBlock
+                                Margin="5,0,3,0"
                                 FontSize="13"
                                 Foreground="#18191B"
-                                Margin="5,0,3,0"
                                 Text="Регистрация" />
 
                             <Image Source="{StaticResource SideArrowIcon}" />
@@ -414,9 +414,9 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Duration="0:0:0.1"
                                 Storyboard.TargetProperty="Opacity"
-                                To="0.8" />
+                                To="0.8"
+                                Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -424,9 +424,9 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Duration="0:0:0.1"
                                 Storyboard.TargetProperty="Opacity"
-                                To="1" />
+                                To="1"
+                                Duration="0:0:0.1" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -434,7 +434,7 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="Button" x:Key="RoundButton">
+    <Style x:Key="RoundButton" TargetType="Button">
         <Setter Property="FontFamily" Value="/Assets/Fonts/#Inter Medium" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Height" Value="42" />
@@ -444,10 +444,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border
+                        x:Name="border"
                         Background="{TemplateBinding Background}"
                         BorderThickness="1"
-                        CornerRadius="12"
-                        x:Name="border">
+                        CornerRadius="12">
 
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -457,10 +457,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="border"
                                             Storyboard.TargetProperty="Opacity"
-                                            To="0.8" />
+                                            To="0.8"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -468,10 +468,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="border"
                                             Storyboard.TargetProperty="Opacity"
-                                            To="1" />
+                                            To="1"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
@@ -482,7 +482,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Button" x:Key="RoundAdminButton">
+    <Style x:Key="RoundAdminButton" TargetType="Button">
         <Setter Property="FontFamily" Value="/Assets/Fonts/#Inter Medium" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Cursor" Value="Hand" />
@@ -490,10 +490,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border
+                        x:Name="border"
                         Background="{TemplateBinding Background}"
                         BorderThickness="1"
-                        CornerRadius="8"
-                        x:Name="border">
+                        CornerRadius="8">
 
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -503,10 +503,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="border"
                                             Storyboard.TargetProperty="Opacity"
-                                            To="0.8" />
+                                            To="0.8"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -514,10 +514,10 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation
-                                            Duration="0:0:0.1"
                                             Storyboard.TargetName="border"
                                             Storyboard.TargetProperty="Opacity"
-                                            To="1" />
+                                            To="1"
+                                            Duration="0:0:0.1" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

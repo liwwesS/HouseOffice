@@ -17,8 +17,14 @@ namespace HouseOffice.WPF.Repositories
         {
             return await _context.UserRequests
                 .Include(r => r.Requests)
+                .Include(r => r.Status)
                 .Where(r => r.UserId == userId)
                 .ToListAsync();
+        }
+
+        public override async Task<List<UserRequest>> GetAllAsync()
+        {
+            return await _context.UserRequests.Include(x => x.Requests).Include(x => x.Status).ToListAsync();
         }
 
         public override async Task AddAsync(UserRequest entity)
