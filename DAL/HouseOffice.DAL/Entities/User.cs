@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-
+using System.Globalization;
 namespace HouseOffice.DAL.Entities
 {
     public class User
@@ -35,6 +35,8 @@ namespace HouseOffice.DAL.Entities
         public string PassportIssued { get; set; }
 
         public DateTime PassportDate { get; set; }
+        
+        public string ShortDateWithYear => PassportDate.ToString("d MMMM, yyyy", new CultureInfo("ru-RU"));
 
         public List<UserRequest> UserRequests { get; set; } = new();
 
