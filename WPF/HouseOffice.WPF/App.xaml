@@ -40,6 +40,9 @@
                 <view:AdminView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodel:BossViewModel}">
+                <view:BossView />
+            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodel:AddUserRequestViewModel}">
                 <view:AddUserRequestView />
