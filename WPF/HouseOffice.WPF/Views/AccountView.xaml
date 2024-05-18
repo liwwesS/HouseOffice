@@ -62,6 +62,7 @@
                             Width="100"
                             HorizontalAlignment="Right"
                             Background="DarkRed"
+                            Command="{Binding LogoutCommand}"
                             Content="Выйти"
                             Foreground="#FFFFFF"
                             Style="{StaticResource RoundButton}" />

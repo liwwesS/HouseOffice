@@ -4,6 +4,7 @@ using HouseOffice.WPF.Helpers;
 using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace HouseOffice.WPF.ViewModels
 {
@@ -20,6 +21,7 @@ namespace HouseOffice.WPF.ViewModels
         private readonly UserRequestUpdater _userRequestUpdater;
 
         public RelayCommand NavigateToAddRequestCommand { get; }
+        public RelayCommand LogoutCommand { get; set; }
 
         public AccountViewModel(INavigationService navigationService, UserSession userSession, IUserRepository userRepository, IRequestRepository requestRepository)
         {
@@ -32,6 +34,7 @@ namespace HouseOffice.WPF.ViewModels
             _userRequestUpdater = new UserRequestUpdater(UserRequests);
 
             NavigateToAddRequestCommand = new RelayCommand(o => { NavigationService.NavigateTo<AddUserRequestViewModel>(); }, o => true);
+            LogoutCommand = new RelayCommand(o => { NavigationService.NavigateTo<LoginViewModel>(); }, o => true);
 
             _ = LoadDataAsync();
         }

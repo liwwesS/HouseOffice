@@ -5,7 +5,6 @@ using HouseOffice.WPF.Helpers;
 using HouseOffice.WPF.Repositories;
 using HouseOffice.WPF.Services;
 using Microsoft.EntityFrameworkCore;
-using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +27,7 @@ namespace HouseOffice.WPF.ViewModels
         public ICommand UpdateStatusCommand { get; set; }
         public ICommand DataGridSelectionChangedCommand { get; set; }
         public ICommand ComboBoxSelectionChangedCommand { get; set; }
+        public RelayCommand LogoutCommand { get; set; }
 
         public UserRequest SelectedUserRequest { get; set; }
         public string SelectedStatus { get; set; }
@@ -49,6 +49,8 @@ namespace HouseOffice.WPF.ViewModels
             DataGridSelectionChangedCommand = new RelayCommand(OnDataGridSelectionChanged);
             ComboBoxSelectionChangedCommand = new RelayCommand(OnComboBoxSelectionChanged); 
             UpdateStatusCommand = new RelayCommand(OnUpdateStatusAsync);
+
+            LogoutCommand = new RelayCommand(o => { NavigationService.NavigateTo<LoginViewModel>(); }, o => true);
 
             _ = LoadDataAsync();
         }

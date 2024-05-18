@@ -64,6 +64,7 @@
                             Width="100"
                             HorizontalAlignment="Right"
                             Background="DarkRed"
+                            Command="{Binding LogoutCommand}"
                             Content="Выйти"
                             Foreground="#FFFFFF"
                             Style="{StaticResource RoundButton}" />
@@ -99,12 +100,28 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Width="2*"
+                            Width="0.9*"
+                            Binding="{Binding Path=Id}"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Header="Идентификатор" />
+
+                        <DataGridTextColumn
+                            Width="1.7*"
                             Binding="{Binding Path=Requests.RequestType}"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="13"
                             Foreground="#848D95"
                             Header="Тип" />
+
+                        <DataGridTextColumn
+                            Width="2*"
+                            Binding="{Binding Path=Users.FIO}"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Header="Заявитель" />
 
                         <DataGridTemplateColumn Width="1.5*" Header="Статус">
                             <DataGridTemplateColumn.CellTemplate>
