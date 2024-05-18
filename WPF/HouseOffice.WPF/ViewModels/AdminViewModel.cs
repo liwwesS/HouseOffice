@@ -27,10 +27,19 @@ namespace HouseOffice.WPF.ViewModels
         public ICommand UpdateStatusCommand { get; set; }
         public ICommand DataGridSelectionChangedCommand { get; set; }
         public ICommand ComboBoxSelectionChangedCommand { get; set; }
+
         public RelayCommand LogoutCommand { get; set; }
 
+        public ICommand OpenEditDialogCommand { get; }
+        public ICommand CloseEditDialogCommand { get; }
+        public ICommand DeleteWalletCommand { get; }
+
         public UserRequest SelectedUserRequest { get; set; }
+
         public string SelectedStatus { get; set; }
+        public bool IsDialogOpen { get; set; }
+
+        public Visibility EditVisibility { get; set; } = Visibility.Collapsed;
 
         private readonly UserRequestUpdater _userRequestUpdater;
 

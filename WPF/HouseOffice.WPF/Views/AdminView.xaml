@@ -7,6 +7,8 @@
     xmlns:local="clr-namespace:HouseOffice.WPF.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:HouseOffice.WPF.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:AdminViewModel}"
     d:DesignHeight="680"
     d:DesignWidth="1020"
     FontFamily="/Assets/Fonts/#Inter Medium"
@@ -25,128 +27,578 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Border Background="#FFFFFF" CornerRadius="20">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="5*" />
-            </Grid.RowDefinitions>
+    <materialDesign:DialogHost
+        Background="#FFFFFF"
+        Identifier="MainDialog"
+        IsOpen="{Binding IsDialogOpen}"
+        Opacity="1"
+        OverlayBackground="Transparent"
+        Placement="Center">
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.9*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
+        <materialDesign:DialogHost.DialogContent>
 
-                <Grid Grid.Column="0">
-                    <StackPanel Margin="20,10">
-                        <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
-                            <TextBlock Foreground="#18191B" Text="Имя пользователя: " />
-                            <TextBlock
-                                Margin="5,0,0,0"
-                                Foreground="#18191B"
-                                Text="{Binding Path=UserSession.CurrentUser.Email}" />
+            <!--#region EditWallet-->
+            <Border
+                Width="434"
+                Height="344"
+                Background="#FFFFFF"
+                CornerRadius="12"
+                Visibility="{Binding EditVisibility}">
+
+                <Grid>
+                    <Button
+                        Width="24"
+                        Height="24"
+                        Margin="0,12,12,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Command="{Binding CloseEditDialogCommand}"
+                        Style="{StaticResource DefaultButton}">
+
+                        <Image
+                            Width="12"
+                            Height="12"
+                            Source="{StaticResource CloseIcon}" />
+                    </Button>
+
+                    <StackPanel>
+                        <TextBlock
+                            Margin="24,24,0,0"
+                            HorizontalAlignment="Left"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="14"
+                            Foreground="#18191B"
+                            Text="Кошелек" />
+
+                        <TextBlock
+                            Margin="24,16,0,0"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Text="Сумма в крипте" />
+
+                        <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
+                            <Border
+                                Width="101"
+                                Height="34"
+                                BorderBrush="#E8ECF0"
+                                BorderThickness="1.5"
+                                CornerRadius="8 0 0 8">
+
+                                <Grid Margin="5,3,5,3">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image
+                                            Width="22"
+                                            Height="22"
+                                            Margin="6,0,0,0"
+                                            Source="{Binding CoinEditIcon}" />
+
+                                        <TextBlock
+                                            Margin="6,0,0,0"
+                                            Foreground="#18191B"
+                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                            Text="{Binding EditShortName}" />
+                                    </StackPanel>
+
+                                    <ToggleButton
+                                        x:Name="CoinToggleButton"
+                                        Margin="0,0,3,0"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        IsChecked="{Binding IsEditToggleButtonChecked}"
+                                        Style="{StaticResource ArrowToggleButton}" />
+
+                                    <Popup
+                                        AllowsTransparency="True"
+                                        HorizontalOffset="-73"
+                                        IsOpen="{Binding ElementName=CoinToggleButton, Path=IsChecked}"
+                                        PlacementTarget="{Binding ElementName=CoinToggleButton}"
+                                        VerticalOffset="15">
+
+                                        <Border
+                                            Width="244"
+                                            Height="236"
+                                            Background="#FFFFFF"
+                                            BorderThickness="2"
+                                            CornerRadius="12">
+
+                                            <Border.BorderBrush>
+                                                <SolidColorBrush Opacity="0.05" Color="Black" />
+                                            </Border.BorderBrush>
+
+                                            <StackPanel>
+                                                <Button
+                                                    Width="232"
+                                                    Margin="4"
+                                                    Command="{Binding EditWalletCommand}"
+                                                    CommandParameter="Bitcoin"
+                                                    Style="{StaticResource ComboWalletButton}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image
+                                                            Width="22"
+                                                            Height="22"
+                                                            Margin="12,0,0,0"
+                                                            Source="{StaticResource BitcoinIcon}" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            FontSize="13"
+                                                            Foreground="#18191B"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="Bitcoin" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            Foreground="#848D95"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="BTC" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <Button
+                                                    Width="232"
+                                                    Margin="4,0,4,4"
+                                                    Command="{Binding EditWalletCommand}"
+                                                    CommandParameter="Ethereum"
+                                                    Style="{StaticResource ComboWalletButton}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image
+                                                            Width="22"
+                                                            Height="22"
+                                                            Margin="12,0,0,0"
+                                                            Source="{StaticResource EthereumIcon}" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            FontSize="13"
+                                                            Foreground="#18191B"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="Ethereum" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            Foreground="#848D95"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="ETH" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <Button
+                                                    Width="232"
+                                                    Margin="4,0,4,4"
+                                                    Command="{Binding EditWalletCommand}"
+                                                    CommandParameter="Binance"
+                                                    Style="{StaticResource ComboWalletButton}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image
+                                                            Width="22"
+                                                            Height="22"
+                                                            Margin="12,0,0,0"
+                                                            Source="{StaticResource BinanceIcon}" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            FontSize="13"
+                                                            Foreground="#18191B"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="Binance Coin" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            Foreground="#848D95"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="BNB" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <Button
+                                                    Width="232"
+                                                    Margin="4,0,4,4"
+                                                    Command="{Binding EditWalletCommand}"
+                                                    CommandParameter="Tether"
+                                                    Style="{StaticResource ComboWalletButton}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image
+                                                            Width="22"
+                                                            Height="22"
+                                                            Margin="12,0,0,0"
+                                                            Source="{StaticResource TetherIcon}" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            FontSize="13"
+                                                            Foreground="#18191B"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="Tether USD" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            Foreground="#848D95"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="USDT" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <Button
+                                                    Width="232"
+                                                    Margin="4,0,4,4"
+                                                    Command="{Binding EditWalletCommand}"
+                                                    CommandParameter="Solana"
+                                                    Style="{StaticResource ComboWalletButton}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image
+                                                            Width="22"
+                                                            Height="22"
+                                                            Margin="12,0,0,0"
+                                                            Source="{StaticResource SolanaIcon}" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            FontSize="13"
+                                                            Foreground="#18191B"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="Solana" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            Foreground="#848D95"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="SOL" />
+                                                    </StackPanel>
+                                                </Button>
+
+                                                <Button
+                                                    Width="232"
+                                                    Margin="4,0,4,4"
+                                                    Command="{Binding EditWalletCommand}"
+                                                    CommandParameter="Litecoin"
+                                                    Style="{StaticResource ComboWalletButton}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Image
+                                                            Width="22"
+                                                            Height="22"
+                                                            Margin="12,0,0,0"
+                                                            Source="{StaticResource LitecoinIcon}" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            FontSize="13"
+                                                            Foreground="#18191B"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="Litecoin" />
+
+                                                        <TextBlock
+                                                            Margin="6,0,0,0"
+                                                            Foreground="#848D95"
+                                                            Style="{StaticResource ShortNameCoinTextBlock}"
+                                                            Text="LTC" />
+                                                    </StackPanel>
+                                                </Button>
+                                            </StackPanel>
+                                        </Border>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+
+                            <TextBox
+                                Width="285"
+                                Height="34"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource AdminWalletTextBox}"
+                                Text="{Binding EditCoinPrice}">
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewTextInput">
+                                        <i:InvokeCommandAction Command="{Binding AmountInputCommand}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                            </TextBox>
                         </StackPanel>
 
                         <TextBlock
-                            Margin="0,20,0,0"
-                            FontFamily="/Assets/Fonts/#Inter SemiBold"
-                            FontSize="24"
-                            Text="Все обращения" />
+                            Margin="24,16,0,0"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Text="Сумма в долларах" />
+
+                        <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
+                            <Border
+                                Width="33"
+                                Height="34"
+                                BorderBrush="#E8ECF0"
+                                BorderThickness="1.5"
+                                CornerRadius="8 0 0 8">
+
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/Assets/Fonts/#Inter Medium"
+                                    FontSize="13"
+                                    Foreground="#18191B"
+                                    Text="$" />
+                            </Border>
+
+                            <TextBox
+                                Width="353"
+                                Height="34"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource AdminWalletTextBox}"
+                                Text="{Binding EditCoinDollarPrice}">
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewTextInput">
+                                        <i:InvokeCommandAction Command="{Binding AmountInputCommand}" PassEventArgsToCommand="True" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                            </TextBox>
+                        </StackPanel>
+
+                        <TextBlock
+                            Margin="24,16,0,0"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Text="Сид-фраза" />
+
+                        <Border
+                            Width="386"
+                            Height="34"
+                            Margin="0,12,0,0"
+                            BorderBrush="#E8ECF0"
+                            BorderThickness="1.5"
+                            CornerRadius="8">
+
+                            <Grid>
+                                <TextBlock
+                                    Margin="12,6,33,6"
+                                    VerticalAlignment="Center"
+                                    FontFamily="/Assets/Fonts/#Inter Medium"
+                                    FontSize="13"
+                                    Text="{Binding EditSeedPhrase}" />
+
+                                <Button
+                                    Margin="0,1,7,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Command="{Binding EditGeneratePhraseCommand}"
+                                    Style="{StaticResource GenerateButton}" />
+                            </Grid>
+                        </Border>
+
+                        <Button
+                            Width="386"
+                            Height="34"
+                            Margin="0,16,0,0"
+                            Background="#18191B"
+                            Command="{Binding UpdateWalletCommand}"
+                            Style="{StaticResource RoundAdminButton}">
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image
+                                    Width="14"
+                                    Height="14"
+                                    Source="{StaticResource WhiteEditIcon}" />
+
+                                <TextBlock
+                                    Margin="10,0,0,0"
+                                    Foreground="#FFFFFF"
+                                    Text="Изменить" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </Grid>
+            </Border>
+            <!--#endregion-->
+        </materialDesign:DialogHost.DialogContent>
 
-                <Grid Grid.Column="1">
-                    <Button
-                        Width="250"
-                        Margin="0,0,0,14.5"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Background="Green"
-                        Content="Все пользователи"
-                        Foreground="#FFFFFF"
-                        Style="{StaticResource RoundButton}" />
+        <Border Background="#FFFFFF" CornerRadius="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
 
-                    <StackPanel Margin="20,10" HorizontalAlignment="Right">
-                        <Button
-                            Width="100"
-                            HorizontalAlignment="Right"
-                            Background="DarkRed"
-                            Content="Выйти"
-                            Foreground="#FFFFFF"
-                            Style="{StaticResource RoundButton}" />
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.9*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
 
-                        <Button
-                            Width="250"
-                            Margin="0,5,0,0"
-                            Background="Green"
-                            Command="{Binding NavigateToAddRequestCommand}"
-                            Content="Изменить статус"
-                            Foreground="#FFFFFF"
-                            Style="{StaticResource RoundButton}" />
-                    </StackPanel>
+                    <Grid Grid.Column="0">
+                        <StackPanel Margin="20,10">
+                            <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+                                <TextBlock Foreground="#18191B" Text="Имя пользователя: " />
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    Foreground="#18191B"
+                                    Text="{Binding Path=UserSession.CurrentUser.Email}" />
+                            </StackPanel>
+
+                            <TextBlock
+                                Margin="0,20,0,0"
+                                FontFamily="/Assets/Fonts/#Inter SemiBold"
+                                FontSize="24"
+                                Text="Все обращения" />
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <StackPanel Margin="20,10" HorizontalAlignment="Right">
+                            <Button
+                                Width="100"
+                                HorizontalAlignment="Right"
+                                Background="DarkRed"
+                                Content="Выйти"
+                                Foreground="#FFFFFF"
+                                Style="{StaticResource RoundButton}" />
+
+                            <Button
+                                Width="250"
+                                Margin="0,5,0,0"
+                                Background="Green"
+                                Command="{Binding NavigateToAddRequestCommand}"
+                                Content="Изменить статус"
+                                Foreground="#FFFFFF"
+                                Style="{StaticResource RoundButton}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <DataGrid
+                        Margin="40,30"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding UserRequests, IsAsync=True}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        Style="{StaticResource MaterialDesignDataGrid}">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="2*"
+                                Binding="{Binding Id}"
+                                FontFamily="/Assets/Fonts/#Inter Medium"
+                                FontSize="13"
+                                Foreground="#848D95"
+                                Header="Идентификатор" />
+
+                            <DataGridTextColumn
+                                Width="2*"
+                                Binding="{Binding Path=Requests.RequestType}"
+                                FontFamily="/Assets/Fonts/#Inter Medium"
+                                FontSize="13"
+                                Foreground="#848D95"
+                                Header="Тип" />
+
+                            <DataGridTextColumn
+                                Width="2*"
+                                Binding="{Binding Path=Users.FIO}"
+                                FontFamily="/Assets/Fonts/#Inter Medium"
+                                FontSize="13"
+                                Foreground="#848D95"
+                                Header="Заявитель" />
+
+                            <DataGridTemplateColumn Width="1.5*" Header="Статус">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox
+                                            x:Name="StatusComboBox"
+                                            FontFamily="/Assets/Fonts/#Inter Medium"
+                                            FontSize="13"
+                                            Foreground="#848D95"
+                                            ItemsSource="{Binding DataContext.StatusComboBox, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            SelectedItem="{Binding Status.StatusType}">
+
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.ComboBoxSelectionChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" PassEventArgsToCommand="True" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Width="25">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <materialDesign:PopupBox
+                                            Margin="0,0,2,0"
+                                            HorizontalAlignment="Right"
+                                            Foreground="#A6B0BA"
+                                            PlacementMode="BottomAndAlignRightEdges"
+                                            StaysOpen="False">
+
+                                            <materialDesign:PopupBox.ToggleContent>
+                                                <Image
+                                                    Width="18"
+                                                    Height="18"
+                                                    Source="{StaticResource ThreeDotsIcon}" />
+                                            </materialDesign:PopupBox.ToggleContent>
+
+                                            <Border
+                                                Width="180"
+                                                Height="80"
+                                                Background="#FFFFFF"
+                                                CornerRadius="12">
+
+                                                <StackPanel>
+                                                    <Button
+                                                        Margin="4"
+                                                        Command="{Binding DataContext.OpenEditDialogCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource ComboWalletButton}">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image
+                                                                Width="16"
+                                                                Height="16"
+                                                                Margin="12,0,0,0"
+                                                                Source="{StaticResource EditIcon}" />
+
+                                                            <TextBlock
+                                                                Margin="6,0,0,0"
+                                                                FontSize="13"
+                                                                Foreground="#18191B"
+                                                                Style="{StaticResource NameCoinTextBlock}"
+                                                                Text="Изменить" />
+                                                        </StackPanel>
+                                                    </Button>
+
+                                                    <Button
+                                                        Margin="4,0,4,4"
+                                                        Command="{Binding DataContext.DeleteWalletCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        CommandParameter="{Binding}"
+                                                        Style="{StaticResource ComboWalletButton}">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image
+                                                                Width="12"
+                                                                Height="12"
+                                                                Margin="12,0,0,0"
+                                                                Source="{StaticResource DeleteIcon}" />
+
+                                                            <TextBlock
+                                                                Margin="10,0,0,0"
+                                                                FontSize="13"
+                                                                Foreground="#18191B"
+                                                                Style="{StaticResource NameCoinTextBlock}"
+                                                                Text="Удалить" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+
+                                        </materialDesign:PopupBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </Grid>
-
-            <Grid Grid.Row="1">
-                <DataGrid
-                    Margin="40,30"
-                    AutoGenerateColumns="False"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding UserRequests, IsAsync=True}"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                    Style="{StaticResource MaterialDesignDataGrid}">
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="2*"
-                            Binding="{Binding Id}"
-                            FontFamily="/Assets/Fonts/#Inter Medium"
-                            FontSize="13"
-                            Foreground="#848D95"
-                            Header="Идентификатор" />
-
-                        <DataGridTextColumn
-                            Width="2*"
-                            Binding="{Binding Path=Requests.RequestType}"
-                            FontFamily="/Assets/Fonts/#Inter Medium"
-                            FontSize="13"
-                            Foreground="#848D95"
-                            Header="Тип" />
-
-                        <DataGridTextColumn
-                            Width="2*"
-                            Binding="{Binding Path=Users.FIO}"
-                            FontFamily="/Assets/Fonts/#Inter Medium"
-                            FontSize="13"
-                            Foreground="#848D95"
-                            Header="Заявитель" />
-
-                        <DataGridTemplateColumn Width="1.5*" Header="Статус">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <ComboBox
-                                        x:Name="StatusComboBox"
-                                        FontFamily="/Assets/Fonts/#Inter Medium"
-                                        FontSize="13"
-                                        Foreground="#848D95"
-                                        ItemsSource="{Binding DataContext.StatusComboBox, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                        SelectedItem="{Binding Status.StatusType}">
-
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged">
-                                                <i:InvokeCommandAction Command="{Binding DataContext.ComboBoxSelectionChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" PassEventArgsToCommand="True" />
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>
-                                    </ComboBox>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </Grid>
-    </Border>
+        </Border>
+    </materialDesign:DialogHost>
 </UserControl>

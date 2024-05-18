@@ -58,6 +58,133 @@
         </DrawingImage.Drawing>
     </DrawingImage>
 
+    <DrawingImage x:Key="EditIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V20 H20 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M3.3335,16.6666L3.3335,14.995C3.3335,14.4646,3.54421,13.9559,3.91928,13.5808L12.9168,4.58325C13.6072,3.8929,14.7265,3.8929,15.4168,4.58325L15.4168,4.58325C16.1072,5.27361,16.1072,6.3929,15.4168,7.08325L6.41928,16.0808C6.04421,16.4559,5.5355,16.6666,5.00507,16.6666L3.3335,16.6666z">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FF18191B"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M14.1665,8.33325L11.6665,5.83325">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FF18191B"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="ThreeDotsIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V20 H20 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M4.75,10.75C5.16421,10.75 5.5,10.4142 5.5,10 5.5,9.58579 5.16421,9.25 4.75,9.25 4.33579,9.25 4,9.58579 4,10 4,10.4142 4.33579,10.75 4.75,10.75z">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FFA6B0BA"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M10,10.75C10.4142,10.75 10.75,10.4142 10.75,10 10.75,9.58579 10.4142,9.25 10,9.25 9.58579,9.25 9.25,9.58579 9.25,10 9.25,10.4142 9.58579,10.75 10,10.75z">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FFA6B0BA"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M15.25,10.75C15.6642,10.75 16,10.4142 16,10 16,9.58579 15.6642,9.25 15.25,9.25 14.8358,9.25 14.5,9.58579 14.5,10 14.5,10.4142 14.8358,10.75 15.25,10.75z">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FFA6B0BA"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="WhiteEditIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V20 H20 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M3.3335,16.6666L3.3335,14.995C3.3335,14.4646,3.54421,13.9559,3.91928,13.5808L12.9168,4.58325C13.6072,3.8929,14.7265,3.8929,15.4168,4.58325L15.4168,4.58325C16.1072,5.27361,16.1072,6.3929,15.4168,7.08325L6.41928,16.0808C6.04421,16.4559,5.5355,16.6666,5.00507,16.6666L3.3335,16.6666z">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FFFFFF"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M14.1665,8.33325L11.6665,5.83325">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FFFFFF"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+    <DrawingImage x:Key="DeleteIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V20 H20 V0 H0 Z">
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M5.8335,5.83325L14.1668,14.1666">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FF18191B"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+                <GeometryDrawing Geometry="F1 M20,20z M0,0z M14.1668,5.83325L5.8335,14.1666">
+                    <GeometryDrawing.Pen>
+                        <Pen
+                            Brush="#FF18191B"
+                            EndLineCap="Round"
+                            LineJoin="Round"
+                            MiterLimit="1"
+                            StartLineCap="Round"
+                            Thickness="1.5" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
     <DrawingImage x:Key="BlackPlusIcon">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V16 H16 V0 H0 Z">
