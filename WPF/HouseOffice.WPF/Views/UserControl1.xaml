@@ -1,199 +1,217 @@
 ﻿<UserControl
-    d:DesignHeight="630"
-    d:DesignWidth="600"
-    mc:Ignorable="d"
     x:Class="HouseOffice.WPF.Views.UserControl1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:HouseOffice.WPF.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    d:DesignHeight="630"
+    d:DesignWidth="600"
+    mc:Ignorable="d">
 
     <Border
+        Width="434"
         Background="#FFFFFF"
         CornerRadius="12"
-        Height="750"
-        Visibility="{Binding EditVisibility}"
-        Width="434">
+        Visibility="{Binding EditVisibility}">
 
         <Grid>
             <Button
-                Command="{Binding CloseEditDialogCommand}"
+                Width="24"
                 Height="24"
-                HorizontalAlignment="Right"
                 Margin="0,12,12,0"
-                Style="{StaticResource DefaultButton}"
+                HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Width="24">
+                Command="{Binding CloseEditDialogCommand}"
+                Style="{StaticResource DefaultButton}">
 
                 <Image
+                    Width="12"
                     Height="12"
-                    Source="{StaticResource CloseIcon}"
-                    Width="12" />
+                    Source="{StaticResource CloseIcon}" />
             </Button>
 
             <StackPanel>
                 <TextBlock
+                    Margin="24,24,0,0"
+                    HorizontalAlignment="Left"
                     FontFamily="/Assets/Fonts/#Inter Medium"
                     FontSize="14"
                     Foreground="#18191B"
-                    HorizontalAlignment="Left"
-                    Margin="24,24,0,0"
                     Text="Пользователь" />
 
                 <TextBlock
+                    Margin="24,16,0,0"
                     FontFamily="/Assets/Fonts/#Inter Medium"
                     FontSize="13"
                     Foreground="#848D95"
-                    Margin="24,16,0,0"
                     Text="Данные пользователя" />
 
                 <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
                     <TextBlock
+                        Width="70"
+                        VerticalAlignment="Center"
                         FontFamily="/Assets/Fonts/#Inter Medium"
                         FontSize="10"
                         Foreground="#18191B"
-                        Text="Фамилия: "
+                        Text="Фамилия: " />
+                    <TextBox
+                        Width="315"
+                        Height="34"
+                        Style="{StaticResource RoundTextBox}" />
+                </StackPanel>
+
+                <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
+                    <TextBlock
+                        Width="70"
                         VerticalAlignment="Center"
-                        Width="65" />
+                        FontFamily="/Assets/Fonts/#Inter Medium"
+                        FontSize="10"
+                        Foreground="#18191B"
+                        Text="Имя: " />
                     <TextBox Height="34" Style="{StaticResource RoundTextBox}" />
                 </StackPanel>
 
                 <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                     <TextBlock
+                        Width="70"
+                        VerticalAlignment="Center"
                         FontFamily="/Assets/Fonts/#Inter Medium"
                         FontSize="10"
                         Foreground="#18191B"
-                        Text="Имя: "
-                        VerticalAlignment="Center"
-                        Width="65" />
-                    <TextBox Height="34" Style="{StaticResource RoundTextBox}" />
+                        Text="Отчество: " />
+
+                    <TextBox
+                        Width="315"
+                        Height="34"
+                        Style="{StaticResource RoundTextBox}" />
                 </StackPanel>
 
                 <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                     <TextBlock
+                        Width="70"
+                        VerticalAlignment="Center"
                         FontFamily="/Assets/Fonts/#Inter Medium"
                         FontSize="10"
                         Foreground="#18191B"
-                        Text="Отчество: "
-                        VerticalAlignment="Center"
-                        Width="65" />
-                    <TextBox Height="34" Style="{StaticResource RoundTextBox}" />
+                        Text="СНИЛС: " />
+
+                    <TextBox
+                        Width="315"
+                        Height="34"
+                        Style="{StaticResource RoundTextBox}" />
                 </StackPanel>
 
                 <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                     <TextBlock
+                        Width="70"
+                        VerticalAlignment="Center"
                         FontFamily="/Assets/Fonts/#Inter Medium"
                         FontSize="10"
                         Foreground="#18191B"
-                        Text="СНИЛС: "
-                        VerticalAlignment="Center"
-                        Width="65" />
-                    <TextBox Height="34" Style="{StaticResource RoundTextBox}" />
-                </StackPanel>
+                        Text="Пароль: " />
 
-                <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
-                    <TextBlock
-                        FontFamily="/Assets/Fonts/#Inter Medium"
-                        FontSize="10"
-                        Foreground="#18191B"
-                        Text="Пароль: "
-                        VerticalAlignment="Center"
-                        Width="65" />
-                    <TextBox Height="34" Style="{StaticResource RoundTextBox}" />
+                    <TextBox
+                        Width="315"
+                        Height="34"
+                        Style="{StaticResource RoundTextBox}" />
                 </StackPanel>
 
                 <StackPanel>
                     <TextBlock
+                        Margin="24,16,0,0"
                         FontFamily="/Assets/Fonts/#Inter Medium"
                         FontSize="13"
                         Foreground="#848D95"
-                        Margin="24,16,0,0"
                         Text="Паспортные данные" />
 
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
                             <TextBlock
+                                Width="70"
+                                VerticalAlignment="Center"
                                 FontFamily="/Assets/Fonts/#Inter Medium"
                                 FontSize="10"
                                 Foreground="#18191B"
-                                Text="Серия: "
-                                VerticalAlignment="Center"
-                                Width="65" />
+                                Text="Серия: " />
                             <TextBox
+                                Width="60"
                                 Height="34"
-                                Style="{StaticResource RoundTextBox}"
-                                Width="60" />
+                                Style="{StaticResource RoundTextBox}" />
                         </StackPanel>
 
                         <StackPanel Margin="10,12,24,0" Orientation="Horizontal">
                             <TextBlock
+                                Width="45"
+                                VerticalAlignment="Center"
                                 FontFamily="/Assets/Fonts/#Inter Medium"
                                 FontSize="10"
                                 Foreground="#18191B"
-                                Text="Номер: "
-                                VerticalAlignment="Center"
-                                Width="45" />
+                                Text="Номер: " />
                             <TextBox
+                                Width="175"
                                 Height="34"
-                                Style="{StaticResource RoundTextBox}"
-                                Width="180" />
+                                Style="{StaticResource RoundTextBox}" />
                         </StackPanel>
                     </StackPanel>
 
 
                     <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
                         <TextBlock
+                            Width="70"
+                            VerticalAlignment="Center"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="10"
                             Foreground="#18191B"
-                            Text="Кем выдан: "
-                            VerticalAlignment="Center"
-                            Width="65" />
-                        <TextBox Height="34" Style="{StaticResource RoundTextBox}" />
+                            Text="Кем выдан: " />
+                        <TextBox
+                            Width="315"
+                            Height="34"
+                            Style="{StaticResource RoundTextBox}" />
                     </StackPanel>
                     <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
                         <TextBlock
+                            Width="70"
+                            VerticalAlignment="Center"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="10"
                             Foreground="#18191B"
-                            Text="Дата выдачи: "
-                            VerticalAlignment="Center"
-                            Width="65" />
-                        <DatePicker Height="34" Width="320" />
+                            Text="Дата выдачи: " />
+
+                        <DatePicker Width="315" Height="34" />
                     </StackPanel>
 
                     <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
                         <TextBlock
+                            Width="70"
+                            VerticalAlignment="Center"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="10"
                             Foreground="#18191B"
-                            Text="Роль: "
-                            VerticalAlignment="Center"
-                            Width="65" />
-                        <ComboBox Height="34" Width="320" />
+                            Text="Роль: " />
+                        <ComboBox Width="315" Height="34" />
                     </StackPanel>
 
                 </StackPanel>
 
                 <Button
-                    Background="#18191B"
-                    Command="{Binding UpdateWalletCommand}"
+                    Width="386"
                     Height="34"
                     Margin="0,50,0,0"
-                    Style="{StaticResource RoundAdminButton}"
-                    Width="386">
+                    Background="#18191B"
+                    Command="{Binding UpdateWalletCommand}"
+                    Style="{StaticResource RoundAdminButton}">
 
                     <StackPanel Orientation="Horizontal">
                         <Image
+                            Width="14"
                             Height="14"
-                            Source="{StaticResource WhiteEditIcon}"
-                            Width="14" />
+                            Source="{StaticResource WhiteEditIcon}" />
 
                         <TextBlock
-                            Foreground="#FFFFFF"
                             Margin="10,0,0,0"
+                            Foreground="#FFFFFF"
                             Text="Изменить" />
                     </StackPanel>
                 </Button>

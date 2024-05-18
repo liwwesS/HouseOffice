@@ -37,6 +37,16 @@ namespace HouseOffice.WPF.ViewModels
         public UserRequest SelectedUserRequest { get; set; }
 
         public string SelectedStatus { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string SNILS { get; set; }
+        public string Password { get; set; }
+        public string PassportSeries { get; set; }
+        public string PassportNumber { get; set; }
+        public string PassportIssued { get; set; }
+        public DateTime PassportDate { get; set; }
+
         public bool IsDialogOpen { get; set; }
 
         public Visibility EditVisibility { get; set; } = Visibility.Collapsed;
@@ -59,6 +69,9 @@ namespace HouseOffice.WPF.ViewModels
             ComboBoxSelectionChangedCommand = new RelayCommand(OnComboBoxSelectionChanged);
             UpdateStatusCommand = new RelayCommand(OnUpdateStatusAsync);
 
+            OpenEditDialogCommand = new RelayCommand(OnOpenEditDialogCommand);
+            CloseEditDialogCommand = new RelayCommand(OnCloseEditDialogCommand);
+
             LogoutCommand = new RelayCommand(o => { NavigationService.NavigateTo<LoginViewModel>(); }, o => true);
 
             _ = LoadDataAsync();
@@ -80,6 +93,37 @@ namespace HouseOffice.WPF.ViewModels
             UserRequests = new ObservableCollection<UserRequest>(userRequests);
 
             _userRequestUpdater.UpdateRequests(userRequests);
+        }
+
+        private async void OnOpenEditDialogCommand(object parameter)
+        {
+            if (parameter is UserRequest selectedUserRequest)
+            {
+                IsDialogOpen = true;
+                EditVisibility = Visibility.Visible;
+
+                await using var context = new ApplicationContext();
+                var user = await context.UserRequests.FirstOrDefaultAsync(x => x.UserId == selectedUserRequest.Users.Id);
+
+                LastName = user.Users.LastName;
+                FirstName = user.Users.FirstName;
+                MiddleName = user.Users.MiddleName;
+                SNILS = user.Users.SNILS;
+                Password = user.Users.Password;
+                PassportSeries = user.Users.PassportSeries;
+                PassportNumber = user.Users.PassportNumber;
+                PassportIssued = user.Users.PassportIssued;
+                PassportDate = user.Users.PassportDate;
+
+                EventMediator.OnDialogOpen();
+            }
+        }
+
+        private void OnCloseEditDialogCommand(object parameter)
+        {
+            IsDialogOpen = false;
+            EditVisibility = Visibility.Collapsed;
+            EventMediator.OnDialogClose();
         }
 
         private void OnDataGridSelectionChanged(object parameter)
