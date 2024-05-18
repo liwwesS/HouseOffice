@@ -103,17 +103,17 @@ namespace HouseOffice.WPF.ViewModels
                 EditVisibility = Visibility.Visible;
 
                 await using var context = new ApplicationContext();
-                var user = await context.UserRequests.FirstOrDefaultAsync(x => x.UserId == selectedUserRequest.Users.Id);
+                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == selectedUserRequest.Users.Id);
 
-                LastName = user.Users.LastName;
-                FirstName = user.Users.FirstName;
-                MiddleName = user.Users.MiddleName;
-                SNILS = user.Users.SNILS;
-                Password = user.Users.Password;
-                PassportSeries = user.Users.PassportSeries;
-                PassportNumber = user.Users.PassportNumber;
-                PassportIssued = user.Users.PassportIssued;
-                PassportDate = user.Users.PassportDate;
+                LastName = user.LastName;
+                FirstName = user.FirstName;
+                MiddleName = user.MiddleName;
+                SNILS = user.SNILS;
+                Password = user.Password;
+                PassportSeries = user.PassportSeries;
+                PassportNumber = user.PassportNumber;
+                PassportIssued = user.PassportIssued;
+                PassportDate = user.PassportDate;
 
                 EventMediator.OnDialogOpen();
             }
