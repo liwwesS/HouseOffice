@@ -174,26 +174,50 @@
                                 TextWrapping="Wrap" />
 
                             <StackPanel Orientation="Vertical">
-                                <TextBlock
-                                    Width="250"
-                                    Height="35"
-                                    Margin="10,0,0,0"
-                                    Text="Серия:" />
-                                <TextBlock
-                                    Width="250"
-                                    Height="35"
-                                    Margin="10,0,0,0"
-                                    Text="Номер:" />
-                                <TextBlock
-                                    Width="250"
-                                    Height="35"
-                                    Margin="10,0,0,0"
-                                    Text="Кем выдан:" />
-                                <TextBlock
-                                    Width="250"
-                                    Height="35"
-                                    Margin="10,0,0,0"
-                                    Text="Дата выдачи:" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Width="90"
+                                        Height="35"
+                                        Margin="10,0,0,0"
+                                        Text="Серия:" />
+                                    <TextBlock
+                                        Width="150"
+                                        Height="35"
+                                        Text="{Binding Path=UserSession.CurrentUser.PassportSeries}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Width="90"
+                                        Height="35"
+                                        Margin="10,0,0,0"
+                                        Text="Номер:" />
+                                    <TextBlock
+                                        Width="150"
+                                        Height="35"
+                                        Text="{Binding Path=UserSession.CurrentUser.PassportNumber}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Width="90"
+                                        Height="35"
+                                        Margin="10,0,0,0"
+                                        Text="Кем выдан:" />
+                                    <TextBlock
+                                        Width="150"
+                                        Height="35"
+                                        Text="{Binding Path=UserSession.CurrentUser.PassportIssued}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        Width="90"
+                                        Height="35"
+                                        Margin="10,0,0,0"
+                                        Text="Дата выдачи:" />
+                                    <TextBlock
+                                        Width="150"
+                                        Height="35"
+                                        Text="{Binding Path=UserSession.CurrentUser.PassportDate}" />
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

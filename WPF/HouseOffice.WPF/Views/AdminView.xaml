@@ -101,12 +101,25 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn
                             Width="2*"
+                            Binding="{Binding Path=Requests.Id}"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Header="Идентификатор" />
+                        <DataGridTextColumn
+                            Width="2*"
                             Binding="{Binding Path=Requests.RequestType}"
                             FontFamily="/Assets/Fonts/#Inter Medium"
                             FontSize="13"
                             Foreground="#848D95"
                             Header="Тип" />
-
+                        <DataGridTextColumn
+                            Width="2*"
+                            Binding="{Binding Path=Requests.RequestType}"
+                            FontFamily="/Assets/Fonts/#Inter Medium"
+                            FontSize="13"
+                            Foreground="#848D95"
+                            Header="Заявитель" />
                         <DataGridTextColumn
                             Width="1.5*"
                             Binding="{Binding Path=Status}"
