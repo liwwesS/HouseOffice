@@ -32,11 +32,14 @@ namespace HouseOffice.WPF.ViewModels
 
         public ICommand OpenEditDialogCommand { get; }
         public ICommand CloseEditDialogCommand { get; }
-        public ICommand DeleteWalletCommand { get; }
+        public ICommand DeleteRequestCommand { get; }
+        public ICommand ChangeRequestCommand { get; }
 
         public UserRequest SelectedUserRequest { get; set; }
+        public User SelectedUser { get; set; }
 
         public string SelectedStatus { get; set; }
+        public string Email { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -71,6 +74,8 @@ namespace HouseOffice.WPF.ViewModels
 
             OpenEditDialogCommand = new RelayCommand(OnOpenEditDialogCommand);
             CloseEditDialogCommand = new RelayCommand(OnCloseEditDialogCommand);
+            DeleteRequestCommand = new RelayCommand(OnDeleteRequestCommand);
+            ChangeRequestCommand = new RelayCommand(OnChangeRequestCommand);
 
             LogoutCommand = new RelayCommand(o => { NavigationService.NavigateTo<LoginViewModel>(); }, o => true);
 
@@ -103,17 +108,18 @@ namespace HouseOffice.WPF.ViewModels
                 EditVisibility = Visibility.Visible;
 
                 await using var context = new ApplicationContext();
-                var user = await context.Users.FirstOrDefaultAsync(x => x.Id == selectedUserRequest.Users.Id);
+                SelectedUser = await context.Users.FirstOrDefaultAsync(x => x.Id == selectedUserRequest.Users.Id);
 
-                LastName = user.LastName;
-                FirstName = user.FirstName;
-                MiddleName = user.MiddleName;
-                SNILS = user.SNILS;
-                Password = user.Password;
-                PassportSeries = user.PassportSeries;
-                PassportNumber = user.PassportNumber;
-                PassportIssued = user.PassportIssued;
-                PassportDate = user.PassportDate;
+                Email = SelectedUser.Email;
+                LastName = SelectedUser.LastName;
+                FirstName = SelectedUser.FirstName;
+                MiddleName = SelectedUser.MiddleName;
+                SNILS = SelectedUser.SNILS;
+                Password = SelectedUser.Password;
+                PassportSeries = SelectedUser.PassportSeries;
+                PassportNumber = SelectedUser.PassportNumber;
+                PassportIssued = SelectedUser.PassportIssued;
+                PassportDate = SelectedUser.PassportDate;
 
                 EventMediator.OnDialogOpen();
             }
@@ -124,6 +130,53 @@ namespace HouseOffice.WPF.ViewModels
             IsDialogOpen = false;
             EditVisibility = Visibility.Collapsed;
             EventMediator.OnDialogClose();
+        }
+
+        private async void OnChangeRequestCommand(object parameter)
+        {
+            if (SelectedUser == null) return;
+
+            var result = MessageBox.Show("Вы уверены, что хотите изменить данные пользователя?", "Подтверждение изменения", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes)
+            {
+                return;
+            }
+
+            SelectedUser.Email = Email;
+            SelectedUser.LastName = LastName;
+            SelectedUser.FirstName = FirstName;
+            SelectedUser.MiddleName = MiddleName;
+            SelectedUser.SNILS = SNILS;
+            SelectedUser.Password = Password;
+            SelectedUser.PassportSeries = PassportSeries;
+            SelectedUser.PassportNumber = PassportNumber;
+            SelectedUser.PassportIssued = PassportIssued;
+            SelectedUser.PassportDate = PassportDate;
+
+            await UserRepository.UpdateUserAsync(SelectedUser);
+
+            await LoadDataAsync();
+            IsDialogOpen = false;
+            EventMediator.OnDialogClose();
+        }
+
+        private async void OnDeleteRequestCommand(object parameter)
+        {
+            if (parameter is UserRequest selectedUserRequest)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите удалить заявление?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes)
+                {
+                    return;
+                }
+
+                await RequestRepository.DeleteAsync(selectedUserRequest);
+                UserRequests.Remove(selectedUserRequest);
+
+                await LoadDataAsync();
+            }
         }
 
         private void OnDataGridSelectionChanged(object parameter)

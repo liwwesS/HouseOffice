@@ -83,6 +83,26 @@
                                 FontFamily="/Assets/Fonts/#Inter Medium"
                                 FontSize="10"
                                 Foreground="#18191B"
+                                Text="Email: " />
+
+                            <TextBox
+                                Width="315"
+                                Height="34"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                IsEnabled="False"
+                                Opacity="0.5"
+                                Style="{StaticResource RoundTextBox}"
+                                Text="{Binding Email}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
+                            <TextBlock
+                                Width="70"
+                                VerticalAlignment="Center"
+                                FontFamily="/Assets/Fonts/#Inter Medium"
+                                FontSize="10"
+                                Foreground="#18191B"
                                 Text="Фамилия: " />
                             <TextBox
                                 Width="315"
@@ -172,7 +192,7 @@
                                 Text="Паспортные данные" />
 
                             <StackPanel Orientation="Horizontal">
-                                <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
+                                <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                                     <TextBlock
                                         Width="70"
                                         VerticalAlignment="Center"
@@ -189,7 +209,7 @@
                                         Text="{Binding PassportSeries}" />
                                 </StackPanel>
 
-                                <StackPanel Margin="10,12,24,0" Orientation="Horizontal">
+                                <StackPanel Margin="10,10,24,0" Orientation="Horizontal">
                                     <TextBlock
                                         Width="45"
                                         VerticalAlignment="Center"
@@ -208,7 +228,7 @@
                             </StackPanel>
 
 
-                            <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
+                            <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                                 <TextBlock
                                     Width="70"
                                     VerticalAlignment="Center"
@@ -216,6 +236,7 @@
                                     FontSize="10"
                                     Foreground="#18191B"
                                     Text="Кем выдан: " />
+
                                 <TextBox
                                     Width="315"
                                     Height="34"
@@ -224,28 +245,36 @@
                                     Style="{StaticResource RoundTextBox}"
                                     Text="{Binding PassportIssued}" />
                             </StackPanel>
-                            <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
+                            <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                                 <TextBlock
                                     Width="70"
+                                    Margin="0,15,0,0"
                                     VerticalAlignment="Center"
                                     FontFamily="/Assets/Fonts/#Inter Medium"
                                     FontSize="10"
                                     Foreground="#18191B"
                                     Text="Дата выдачи: " />
 
-                                <DatePicker Width="315" Height="34" />
+                                <DatePicker
+                                    Width="305"
+                                    Height="34"
+                                    Margin="10,0,0,0" />
                             </StackPanel>
 
-                            <StackPanel Margin="24,12,24,0" Orientation="Horizontal">
+                            <StackPanel Margin="24,10,24,0" Orientation="Horizontal">
                                 <TextBlock
                                     Width="70"
+                                    Margin="0,15,0,0"
                                     VerticalAlignment="Center"
                                     FontFamily="/Assets/Fonts/#Inter Medium"
                                     FontSize="10"
                                     Foreground="#18191B"
                                     Text="Роль: " />
 
-                                <ComboBox Width="315" Height="34" />
+                                <ComboBox
+                                    Width="305"
+                                    Height="34"
+                                    Margin="10,0,0,0" />
                             </StackPanel>
 
                         </StackPanel>
@@ -255,6 +284,7 @@
                             Height="34"
                             Margin="0,40,0,0"
                             Background="#18191B"
+                            Command="{Binding ChangeRequestCommand}"
                             Style="{StaticResource RoundAdminButton}">
 
                             <StackPanel Orientation="Horizontal">
@@ -319,6 +349,7 @@
                                 Width="100"
                                 HorizontalAlignment="Right"
                                 Background="DarkRed"
+                                Command="{Binding LogoutCommand}"
                                 Content="Выйти"
                                 Foreground="#FFFFFF"
                                 Style="{StaticResource RoundButton}" />
@@ -327,6 +358,7 @@
                                 Width="250"
                                 Margin="0,5,0,0"
                                 Background="Green"
+                                Command="{Binding UpdateStatusCommand}"
                                 Content="Изменить статус"
                                 Foreground="#FFFFFF"
                                 Style="{StaticResource RoundButton}" />
@@ -342,11 +374,18 @@
                         ItemsSource="{Binding UserRequests, IsAsync=True}"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        SelectedItem="{Binding SelectedUserRequest}"
                         Style="{StaticResource MaterialDesignDataGrid}">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.DataGridSelectionChangedCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" PassEventArgsToCommand="True" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
 
                         <DataGrid.Columns>
                             <DataGridTextColumn
-                                Width="2*"
+                                Width="150"
                                 Binding="{Binding Id}"
                                 FontFamily="/Assets/Fonts/#Inter Medium"
                                 FontSize="13"
@@ -354,7 +393,7 @@
                                 Header="Идентификатор" />
 
                             <DataGridTextColumn
-                                Width="2*"
+                                Width="280"
                                 Binding="{Binding Path=Requests.RequestType}"
                                 FontFamily="/Assets/Fonts/#Inter Medium"
                                 FontSize="13"
@@ -362,14 +401,14 @@
                                 Header="Тип" />
 
                             <DataGridTextColumn
-                                Width="2*"
+                                Width="250"
                                 Binding="{Binding Path=Users.FIO}"
                                 FontFamily="/Assets/Fonts/#Inter Medium"
                                 FontSize="13"
                                 Foreground="#848D95"
                                 Header="Заявитель" />
 
-                            <DataGridTemplateColumn Width="1.5*" Header="Статус">
+                            <DataGridTemplateColumn Width="200" Header="Статус">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <ComboBox
@@ -390,7 +429,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Width="25">
+                            <DataGridTemplateColumn Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <materialDesign:PopupBox
@@ -419,6 +458,7 @@
                                                         Command="{Binding DataContext.OpenEditDialogCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                         CommandParameter="{Binding}"
                                                         Style="{StaticResource ComboWalletButton}">
+
                                                         <StackPanel Orientation="Horizontal">
                                                             <Image
                                                                 Width="16"
@@ -437,9 +477,10 @@
 
                                                     <Button
                                                         Margin="4,0,4,4"
-                                                        Command="{Binding DataContext.DeleteWalletCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                        Command="{Binding DataContext.DeleteRequestCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                         CommandParameter="{Binding}"
                                                         Style="{StaticResource ComboWalletButton}">
+
                                                         <StackPanel Orientation="Horizontal">
                                                             <Image
                                                                 Width="12"

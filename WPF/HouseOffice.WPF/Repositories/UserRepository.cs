@@ -42,6 +42,26 @@ namespace HouseOffice.WPF.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateUserAsync(User user)
+        {
+            var existingUser = await _context.Users.FindAsync(user.Id);
+            if (existingUser != null)
+            {
+                existingUser.Email = user.Email;
+                existingUser.LastName = user.LastName;
+                existingUser.FirstName = user.FirstName;
+                existingUser.MiddleName = user.MiddleName;
+                existingUser.SNILS = user.SNILS;
+                existingUser.Password = user.Password;
+                existingUser.PassportSeries = user.PassportSeries;
+                existingUser.PassportNumber = user.PassportNumber;
+                existingUser.PassportIssued = user.PassportIssued;
+                existingUser.PassportDate = user.PassportDate;
+
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public override async Task DeleteAsync(User entity)
         {
             await base.DeleteAsync(entity);

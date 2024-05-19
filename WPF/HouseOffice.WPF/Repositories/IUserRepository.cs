@@ -7,5 +7,6 @@ namespace HouseOffice.WPF.Repositories
         Task<List<User>> GetUsersWithRoleAsync(string roleType);
         Task<User> GetUserByEmailAsync(string email);
         Task<User> GetUserBySNILSAsync(string snils);
+        Task UpdateUserAsync(User user);
     }
 }
