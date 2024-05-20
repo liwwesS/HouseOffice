@@ -27,5 +27,8 @@ namespace HouseOffice.DAL.Entities
         public bool? LowIncomeFamily { get; set; }
 
         public DateTime? RequestDate { get; set; }
+        
+        [NotMapped]
+        public bool IsOverdue { get; set; }
     }
 }

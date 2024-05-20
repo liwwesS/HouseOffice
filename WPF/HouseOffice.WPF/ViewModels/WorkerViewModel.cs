@@ -71,6 +71,8 @@ namespace HouseOffice.WPF.ViewModels
             UserRequests = new ObservableCollection<UserRequest>(userRequests);
 
             _userRequestUpdater.UpdateRequests(userRequests);
+
+            UpdateRequestStyles();
         }
 
         private void OnDataGridSelectionChanged(object parameter)
@@ -126,6 +128,21 @@ namespace HouseOffice.WPF.ViewModels
 
             await RequestRepository.UpdateAsync(SelectedUserRequest);
             _userRequestUpdater.UpdateRequests(await RequestRepository.GetAllAsync());
+        }
+        
+        private void UpdateRequestStyles()
+        {
+            foreach (var request in UserRequests)
+            {
+                if (request.RequestDate.HasValue && (DateTime.Now - request.RequestDate.Value).Days > 30)
+                {
+                    request.IsOverdue = true;
+                }
+                else
+                {
+                    request.IsOverdue = false;
+                }
+            }
         }
     }
 }

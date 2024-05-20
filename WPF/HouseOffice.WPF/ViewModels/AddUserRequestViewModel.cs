@@ -15,12 +15,12 @@ namespace HouseOffice.WPF.ViewModels;
 public class AddUserRequestViewModel : ViewModelBase
 {
     public UserSession UserSession { get; set; }
-
+    
     public IUserRepository UserRepository { get; set; }
     public IRequestRepository RequestRepository { get; set; }
 
     public INavigationService NavigationService { get; set; }
-
+    
     public ICommand RequestSelectionChangedCommand { get; set; }
     public RelayCommand AddRequestAndNavigate { get; set; }
 
@@ -42,6 +42,7 @@ public class AddUserRequestViewModel : ViewModelBase
         UserRepository = userRepository;
         RequestRepository = requestRepository;
 
+
         Requests = new ObservableCollection<string>();
         AddRequestAndNavigate = new RelayCommand(OnAddRequestAndNavigate);
         RequestSelectionChangedCommand = new RelayCommand(OnRequestSelectionChanged);
@@ -54,6 +55,8 @@ public class AddUserRequestViewModel : ViewModelBase
         await using var context = new ApplicationContext();
         var requests = await context.Requests.Select(x => x.RequestType.ToString()).Distinct().ToListAsync();
         var selectedRequest = await context.Requests.FirstOrDefaultAsync(x => x.Id == 1);
+
+
 
         Requests = new ObservableCollection<string>(requests);
         SelectedRequest = selectedRequest.RequestType;
@@ -70,11 +73,12 @@ public class AddUserRequestViewModel : ViewModelBase
             UserId = UserSession.CurrentUser.Id,
             StatusId = 1,
             RequestId = requestId,
+            RequestDate = DateTime.Now
         };
 
         await RequestRepository.AddAsync(request);
     }
-
+    
     private async void OnAddRequestAndNavigate(object parameter)
     {
         await AddUserRequestAsync();
