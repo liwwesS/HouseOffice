@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace HouseOffice.WPF.ViewModels
 {
@@ -28,6 +29,7 @@ namespace HouseOffice.WPF.ViewModels
         public ICommand DataGridSelectionChangedCommand { get; set; }
         public ICommand ComboBoxSelectionChangedCommand { get; set; }
         public RelayCommand LogoutCommand { get; set; }
+        public RelayCommand PrintCommand { get; set; }
 
         public UserRequest SelectedUserRequest { get; set; }
         public string SelectedStatus { get; set; }
@@ -49,6 +51,7 @@ namespace HouseOffice.WPF.ViewModels
             DataGridSelectionChangedCommand = new RelayCommand(OnDataGridSelectionChanged);
             ComboBoxSelectionChangedCommand = new RelayCommand(OnComboBoxSelectionChanged); 
             UpdateStatusCommand = new RelayCommand(OnUpdateStatusAsync);
+            PrintCommand = new RelayCommand(OnPrintCommand);
 
             LogoutCommand = new RelayCommand(o => { NavigationService.NavigateTo<LoginViewModel>(); }, o => true);
 
@@ -72,7 +75,7 @@ namespace HouseOffice.WPF.ViewModels
 
             _userRequestUpdater.UpdateRequests(userRequests);
 
-            UpdateRequestStyles();
+            await UpdateRequestStyles();
         }
 
         private void OnDataGridSelectionChanged(object parameter)
@@ -130,7 +133,7 @@ namespace HouseOffice.WPF.ViewModels
             _userRequestUpdater.UpdateRequests(await RequestRepository.GetAllAsync());
         }
         
-        private void UpdateRequestStyles()
+        private async Task UpdateRequestStyles()
         {
             foreach (var request in UserRequests)
             {
@@ -143,6 +146,52 @@ namespace HouseOffice.WPF.ViewModels
                     request.IsOverdue = false;
                 }
             }
+        }
+
+        private void OnPrintCommand(object parameter)
+        {
+            if (SelectedUserRequest == null)
+            {
+                MessageBox.Show("Не выбрано заявление из списка");
+                return;
+            }
+            else
+            {
+                Word.Application wordApp = new Word.Application();
+                wordApp.Visible = false;
+
+                try
+                {
+                    using var db = new ApplicationContext();
+                    var user = db.Users.FirstOrDefault(x => x.Id == UserSession.CurrentUser.Id);
+                    var userRequest = db.UserRequests.FirstOrDefault(x => x.UserId == UserSession.CurrentUser.Id);
+
+                    var wordDocument = new Word.Document();
+
+                    switch (userRequest.Requests.RequestType)
+                    {
+                        case "На улучшение жилищных условий":
+                            wordDocument = wordApp.Documents.Open($"{Environment.CurrentDirectory}/Templates/Улучшение условий.docx");
+                            break;
+                    }
+
+                    ReplaceWordStub("{FIO}", user.FIO.ToString(), wordDocument);
+                    ReplaceWordStub("{Address}", user.Address.ToString(), wordDocument);
+                    wordDocument.SaveAs2($"{Environment.CurrentDirectory}/Documents/Request{userRequest.Id}.docx");
+                    wordApp.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }        
+        }
+
+        private static void ReplaceWordStub(string stubToReplace, string text, Word.Document wordDocument)
+        {
+            var range = wordDocument.Content;
+            range.Find.ClearFormatting();
+            range.Find.Execute(FindText: stubToReplace, ReplaceWith: text);
         }
     }
 }

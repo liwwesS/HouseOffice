@@ -23,10 +23,17 @@ public class AddUserRequestViewModel : ViewModelBase
     
     public ICommand RequestSelectionChangedCommand { get; set; }
     public RelayCommand AddRequestAndNavigate { get; set; }
+    public RelayCommand BackCommand { get; set; }
 
     public ObservableCollection<string> Requests { get; set; }
 
     public string SelectedRequest { get; set; }
+
+    public string LandRegistrationFile { get; set; }
+    public string PassportFile { get; set; }
+    public string ProxyFile { get; set; }
+    public string Address { get; set; }
+    public string PhoneNumber { get; set; }
 
     public Visibility LifeUpgradeVisibility { get; set; } = Visibility.Visible;
     public Visibility CheckHouseVisibility { get; set; } = Visibility.Collapsed;
@@ -46,6 +53,7 @@ public class AddUserRequestViewModel : ViewModelBase
         Requests = new ObservableCollection<string>();
         AddRequestAndNavigate = new RelayCommand(OnAddRequestAndNavigate);
         RequestSelectionChangedCommand = new RelayCommand(OnRequestSelectionChanged);
+        BackCommand = new RelayCommand(o => { NavigationService.NavigateTo<AccountViewModel>(); }, o => true);
 
         _ = GetDataAsync();
     }
@@ -55,8 +63,6 @@ public class AddUserRequestViewModel : ViewModelBase
         await using var context = new ApplicationContext();
         var requests = await context.Requests.Select(x => x.RequestType.ToString()).Distinct().ToListAsync();
         var selectedRequest = await context.Requests.FirstOrDefaultAsync(x => x.Id == 1);
-
-
 
         Requests = new ObservableCollection<string>(requests);
         SelectedRequest = selectedRequest.RequestType;
@@ -68,15 +74,51 @@ public class AddUserRequestViewModel : ViewModelBase
         var requestType = await context.Requests.FirstOrDefaultAsync(x => x.RequestType == SelectedRequest);
         var requestId = requestType.Id;
 
-        var request = new UserRequest()
+        if (requestId == 3)
         {
-            UserId = UserSession.CurrentUser.Id,
-            StatusId = 1,
-            RequestId = requestId,
-            RequestDate = DateTime.Now
-        };
+            var request = new UserRequest()
+            {
+                UserId = UserSession.CurrentUser.Id,
+                StatusId = 1,
+                RequestId = requestId,
+                RequestDate = DateTime.Now,
+                PassportFile = PassportFile,
+                LandRegistrationFile = LandRegistrationFile,
+                ProxyFile = ProxyFile,
+            };
 
-        await RequestRepository.AddAsync(request);
+            await RequestRepository.AddAsync(request);
+
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == UserSession.CurrentUser.Id);
+            if (user != null)
+            {
+                user.Address = Address;
+                user.PhoneNumber = PhoneNumber;
+            }
+
+            await context.SaveChangesAsync();
+        }
+        else
+        {
+            var request = new UserRequest()
+            {
+                UserId = UserSession.CurrentUser.Id,
+                StatusId = 1,
+                RequestId = requestId,
+                RequestDate = DateTime.Now
+            };
+
+            await RequestRepository.AddAsync(request);
+
+            var user = await context.Users.FirstOrDefaultAsync(x => x.Id == UserSession.CurrentUser.Id);
+            if (user != null)
+            {
+                user.Address = Address;
+                user.PhoneNumber = PhoneNumber;
+            }
+
+            await context.SaveChangesAsync();
+        }   
     }
     
     private async void OnAddRequestAndNavigate(object parameter)
