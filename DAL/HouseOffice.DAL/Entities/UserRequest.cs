@@ -26,6 +26,10 @@ namespace HouseOffice.DAL.Entities
 
         public bool? LowIncomeFamily { get; set; }
 
+        public string? LandRegistrationFile { get; set; }
+        public string? PassportFile { get; set; }
+        public string? ProxyFile { get; set; }
+
         public DateTime? RequestDate { get; set; }
         
         [NotMapped]
