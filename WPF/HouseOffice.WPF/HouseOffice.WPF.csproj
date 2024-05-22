@@ -22,6 +22,7 @@
 
     <ItemGroup>
       <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.5" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
       <PackageReference Include="Microsoft.Office.Interop.Word" Version="15.0.4797.1004" />
