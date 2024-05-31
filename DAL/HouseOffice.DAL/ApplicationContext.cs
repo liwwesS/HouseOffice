@@ -40,7 +40,7 @@ namespace HouseOffice.DAL
                             .SetBasePath(Directory.GetCurrentDirectory())
                             .Build();
 
-            optionsBuilder.UseSqlite(config.GetConnectionString("SQLiteConnection"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("SQLServerConnection"));
         }
     }
 }
