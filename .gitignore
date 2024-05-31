@@ -1,2 +1,7 @@
 ﻿/.idea/.idea.HouseOffice/.idea/.gitignore
 /.idea/.idea.HouseOffice/.idea/encodings.xml
+/.vs
+/DAL/HouseOffice.DAL/bin/Debug/net8.0
+/DAL/HouseOffice.DAL/obj
+/WPF/HouseOffice.WPF/bin/Debug/net8.0-windows
+/WPF/HouseOffice.WPF/obj
